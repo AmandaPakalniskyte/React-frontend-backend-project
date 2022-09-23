@@ -1,5 +1,5 @@
 const createCartItemViewModel = (cartItemDoc) => ({
-  cupId: cartItemDoc.cupId.toString(),
+  paintingId: cartItemDoc.paintingId.toString(),
   amount: cartItemDoc.amount
 })
 

@@ -6,7 +6,7 @@ const {
   sendErrorResponse,
 } = require('../helpers/errors');
 
-const findCup = (cartItems, id) => cartItems.find((item) => item.cupId.toString() === id);
+const findPainting = (cartItems, id) => cartItems.find((item) => item.paintingId.toString() === id);
 
 const fetchAll = (req, res) => {
   res.status(200).json(req.authUser.cartItems.map(createCartItemViewModel))
@@ -18,11 +18,11 @@ const create = async (req, res) => {
   try {
     await UserModel.validateCartItem(data);
 
-    const foundCup = findCup(req.authUser.cartItems, data.cupId);
-    if (foundCup) throw createBadDataError('Cup already exist in cart');
+    const foundPainting = findPainting(req.authUser.cartItems, data.paintingId);
+    if (foundPainting) throw createBadDataError('Painting already exist in cart');
 
     const newCartItemDoc = {
-      cupId: data.cupId,
+      paintingId: data.paintingId,
       amount: data.amount,
     }
 
@@ -38,15 +38,15 @@ const create = async (req, res) => {
 
 const update = async (req, res) => {
   const data = {
-    cupId: req.params.id,
+    paintingId: req.params.id,
     amount: req.body.amount,
   }
 
   try {
     await UserModel.validateCartItem(data);
 
-    const foundCartItemDoc = findCup(req.authUser.cartItems, data.cupId);
-    if (!foundCartItemDoc) throw createNotFoundError('Cup does not exist in cart');
+    const foundCartItemDoc = findPainting(req.authUser.cartItems, data.paintingId);
+    if (!foundCartItemDoc) throw createNotFoundError('Painting does not exist in cart');
 
     foundCartItemDoc.amount = data.amount;
 
@@ -59,13 +59,13 @@ const update = async (req, res) => {
 }
 
 const remove = async (req, res) => {
-  const cupId = req.params.id;
+  const paintingId = req.params.id;
 
   try {
-    const foundCartItemDoc = findCup(req.authUser.cartItems, cupId);
-    if (!foundCartItemDoc) throw createNotFoundError('Cup does not exist in cart');
+    const foundCartItemDoc = findPainting(req.authUser.cartItems, paintingId);
+    if (!foundCartItemDoc) throw createNotFoundError('Painting does not exist in cart');
 
-    req.authUser.cartItems = req.authUser.cartItems.filter(x => x.cupId.toString() !== cupId);
+    req.authUser.cartItems = req.authUser.cartItems.filter(x => x.paintingId.toString() !== paintingId);
 
     await req.authUser.save();
 

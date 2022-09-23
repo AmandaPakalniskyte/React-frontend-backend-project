@@ -1,6 +1,6 @@
 const { Schema, Types, model } = require('mongoose');
 const yup = require('yup');
-const CupModel = require('./cup-model');
+const PaintingModel = require('./painting-model');
 
 const userSchema = Schema({
   email: {
@@ -18,9 +18,9 @@ const userSchema = Schema({
   },
   cartItems: {
     type: [{
-      cupId: {
+      paintingId: {
         type: Schema.Types.ObjectId,
-        ref: 'Cup',
+        ref: 'Painting',
         required: true,
       },
       amount: {
@@ -38,20 +38,20 @@ const userSchema = Schema({
 });
 
 const cartItemValidationSchema = yup.object({
-  cupId: yup.string().typeError('User.cartItems element.cupId must be a string')
-    .required('User.cartItems element.cupId is required')
+  paintingId: yup.string().typeError('User.cartItems element.paintingId must be a string')
+    .required('User.cartItems element.paintingId is required')
     .test(
       'is-mongo-object-id',
-      'User.cartItems element.cupId must be valid MongoDB object Id',
+      'User.cartItems element.paintingId must be valid MongoDB object Id',
       Types.ObjectId.isValid
     )
     .test(
-      'cup-exists',
-      'cup was not found using cartItems element.cupId ',
-      async (cupId) => {
-        const cupExists = await CupModel.exists({ _id: cupId });
+      'painting-exists',
+      'painting was not found using cartItems element.paintingId ',
+      async (paintingId) => {
+        const paintingExists = await CupMoPainting.exists({ _id: paintingId });
 
-        return cupExists;
+        return paintingExists;
       }
     ),
 

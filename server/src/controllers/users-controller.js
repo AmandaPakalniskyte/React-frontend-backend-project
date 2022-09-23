@@ -34,7 +34,7 @@ const create = async (req, res) => {
       password,
       role,
       cartItems,
-      favoredCups,
+      favoredPaintings,
       img,
     } = requestData;
 
@@ -43,7 +43,7 @@ const create = async (req, res) => {
       password: await hashPassword(password),
       role,
       cartItems,
-      favoredCups,
+      favoredPaintings,
       img
     });
 
@@ -63,7 +63,7 @@ const replace = async (req, res) => {
       password,
       role,
       cartItems,
-      favoredCups,
+      favoredPaintings,
       img,
     } = requestData;
 
@@ -77,7 +77,7 @@ const replace = async (req, res) => {
         password: await hashPassword(password),
         role,
         cartItems,
-        favoredCups,
+        favoredPaintings,
         img,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -104,7 +104,7 @@ const update = async (req, res) => {
       password,
       role,
       cartItems,
-      favoredCups,
+      favoredPaintings,
       img,
     } = requestData;
 
@@ -115,7 +115,7 @@ const update = async (req, res) => {
         password: password && await hashPassword(password),
         role,
         cartItems,
-        favoredCups,
+        favoredPaintings,
         img
       },
       { new: true }

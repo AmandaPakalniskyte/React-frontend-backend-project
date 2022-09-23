@@ -1,5 +1,5 @@
 {
-  "cups": [
+  "paintings": [
     {
       "id": "12A4CD9E-F969-7106-0E70-A8214ED12111",
       "title": "Mamos veidrodis",
@@ -45,7 +45,7 @@
       "categoryId": 1,
       "price": 1.99,
       "img": "https://i.pinimg.com/474x/c3/47/d1/c347d1edb0cdf3956fed54f69b17ae9c--pottery-mugs-ceramic-pottery.jpg",
-      "description": "    const fetchedCups = await CupService.fetchAll();\n      setCups(fetchedCups);",
+      "description": "    const fetchedPaintings = await PaintingService.fetchAll();\n      setPaintings(fetchedPaintings);",
       "id": "QBEzorz"
     },
     {
