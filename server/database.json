@@ -1,0 +1,74 @@
+{
+  "cups": [
+    {
+      "id": "12A4CD9E-F969-7106-0E70-A8214ED12111",
+      "title": "Mamos veidrodis",
+      "description": "Donec nibh. Quisque nonummy ipsum non arcu. Vivamus sit amet risus. Donec egestas. Aliquam nec enim. Nunc ut",
+      "categoryId": 2,
+      "img": "https://www.craftson.lt/image/cache/catalog/Seller_419/Slide3-800x800.PNG",
+      "price": 5.99
+    },
+    {
+      "id": "F1BB0713-A37A-9766-7896-26BDADC62132",
+      "title": "Curabitur massa.",
+      "description": "dis parturient montes, nascetur ridiculus mus. Proin vel arcu eu odio tristique pharetra. Quisque ac libero nec ligula consectetuer rhoncus. Nullam velit dui, semper et, lacinia vitae, sodales at,",
+      "categoryId": 2,
+      "img": "https://m.media-amazon.com/images/I/918nomWTWLL._AC_SL1500_.jpg",
+      "price": 5.99
+    },
+    {
+      "id": "6B09AC86-EBD2-41B1-1733-2AEEFE491165",
+      "title": "erat eget",
+      "description": "nec ligula consectetuer rhoncus. Nullam velit dui, semper et, lacinia vitae, sodales at, velit. Pellentesque ultricies dignissim lacus. Aliquam rutrum lorem",
+      "categoryId": 1,
+      "img": "https://www.craftson.lt/image/cache/catalog/Seller_419/Slide3-800x800.PNG",
+      "price": 5.99
+    },
+    {
+      "title": "Laumė",
+      "categoryId": 3,
+      "price": 5.19,
+      "img": "https://i.pinimg.com/474x/c3/47/d1/c347d1edb0cdf3956fed54f69b17ae9c--pottery-mugs-ceramic-pottery.jpg",
+      "description": "Aprašymas...",
+      "id": "fGm8Ms3"
+    },
+    {
+      "title": "Kačiukas",
+      "categoryId": 2,
+      "price": 5,
+      "img": "https://i.pinimg.com/474x/39/15/ba/3915ba3e43088db64e3bb47408e38167.jpg",
+      "description": "MEEOOOOOWWWW",
+      "id": "7ZBa8fR"
+    },
+    {
+      "title": "Laumė",
+      "categoryId": 1,
+      "price": 1.99,
+      "img": "https://i.pinimg.com/474x/c3/47/d1/c347d1edb0cdf3956fed54f69b17ae9c--pottery-mugs-ceramic-pottery.jpg",
+      "description": "    const fetchedCups = await CupService.fetchAll();\n      setCups(fetchedCups);",
+      "id": "QBEzorz"
+    },
+    {
+      "title": "Puoduks",
+      "categoryId": 2,
+      "price": 10.99,
+      "img": "https://i.pinimg.com/474x/c3/47/d1/c347d1edb0cdf3956fed54f69b17ae9c--pottery-mugs-ceramic-pottery.jpg",
+      "description": "Brangokas",
+      "id": "Vs7jztf"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "title": "Sriuba"
+    },
+    {
+      "id": 2,
+      "title": "Kava"
+    },
+    {
+      "id": 3,
+      "title": "Arbata"
+    }
+  ]
+}
