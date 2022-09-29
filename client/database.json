@@ -12,8 +12,7 @@
         "/bold-wall-dark.jpg"
       ],
       "price": 50,
-      "sizeId": 1,
-      "liked": true
+      "sizeId": 1
     },
     {
       "id": "D23A657F-CBEC-9639-2E85-7CA56B098603",
@@ -27,7 +26,8 @@
         "/chaos-wall-dark.jpg"
       ],
       "price": 80,
-      "sizeId": 2
+      "sizeId": 2,
+      "liked": true
     },
     {
       "id": "12A4CD9E-F969-7106-0E70-A8214ED12111",
