@@ -1,4 +1,3 @@
-
 const { createUnauthorizedError, createForbiddenError, sendErrorResponse } = require('../helpers/errors');
 const { decodeToken } = require('../helpers/token');
 const UserModel = require('../models/user-model');

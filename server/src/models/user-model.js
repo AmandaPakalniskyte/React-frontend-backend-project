@@ -7,6 +7,10 @@ const userSchema = Schema({
     type: String,
     required: true,
   },
+  fullname: {
+    type: String,
+    required: true,
+  },
   password: {
     type: String,
     required: true,
@@ -49,7 +53,7 @@ const cartItemValidationSchema = yup.object({
       'painting-exists',
       'painting was not found using cartItems element.paintingId ',
       async (paintingId) => {
-        const paintingExists = await CupMoPainting.exists({ _id: paintingId });
+        const paintingExists = await PaintingModel.exists({ _id: paintingId });
 
         return paintingExists;
       }
@@ -75,6 +79,10 @@ const userValidationSchema = yup.object({
         return foundUser === null;
       }
     ),
+
+  fullname: yup
+    .string().typeError('User.fullname must be a string')
+    .required('User.fullname is required'),
 
   password: yup.string().typeError('User.password must be a string')
     .required('User.password is required')
@@ -110,6 +118,8 @@ const userUpdateValidationSchema = yup.object({
         return foundUser === null;
       }
     ),
+
+  fullname: yup.string().typeError('User.fullname must be a string'),
 
   password: yup
     .string().typeError('User.password must be a string')

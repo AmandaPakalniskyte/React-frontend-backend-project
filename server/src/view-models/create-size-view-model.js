@@ -1,6 +1,6 @@
 const createSizeViewModel = (sizeDoc) => ({
     id: sizeDoc._id.toString(),
-    title: categoryDoc.title,
+    title: sizeDoc.title,
     createdAt: sizeDoc.createdAt,
     updatedAt: sizeDoc.updatedAt,
   });

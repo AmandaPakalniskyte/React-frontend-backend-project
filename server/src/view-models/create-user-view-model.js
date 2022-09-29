@@ -6,6 +6,7 @@ const createUserViewModel = (userDoc) => ({
   role: userDoc.role,
   cartItems: userDoc.cartItems.map(createCartItemViewModel),
   img: userDoc.img,
+  fullname: userDoc.fullname,
   createdAt: userDoc.createdAt,
   updatedAt: userDoc.updatedAt,
 });
