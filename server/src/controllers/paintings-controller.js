@@ -27,8 +27,8 @@ const fetchAll = async (req, res) => {
       : await PaintingModel.find(filter);
 
     res.status(200).json(joinedDocuments
-      ? paintingDocs.map(createCupPoPaintingatedViewModel)
-      : paintingDocs.map(createCupViPaintingodel)
+      ? paintingDocs.map(createPaintingPopulatedViewModel)
+      : paintingDocs.map(createPaintingViewModel)
     );
   } catch (err) { sendErrorResponse(err, res); }
 };
