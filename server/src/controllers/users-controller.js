@@ -1,7 +1,6 @@
 const { createNotFoundError, sendErrorResponse } = require('../helpers/errors');
 const { hashPassword } = require('../helpers/password-encryption');
 const UserModel = require('../models/user-model');
-const createUserViewModel = require('../view-models/create-user-view-model');
 
 const createUserNotFoundError = (userId) => createNotFoundError(`User with id '${userId}' was not found`);
 
@@ -9,7 +8,7 @@ const fetchAll = async (req, res) => {
   try {
     const usersDocs = await UserModel.find();
 
-    res.status(200).json(usersDocs.map(createUserViewModel));
+    res.status(200).json(usersDocs);
   } catch (err) { sendErrorResponse(err, res); }
 };
 
@@ -20,7 +19,7 @@ const fetch = async (req, res) => {
     const foundUserDoc = await UserModel.findById(userId);
     if (foundUserDoc === null) throw createUserNotFoundError(userId);
 
-    res.status(200).json(createUserViewModel(foundUserDoc));
+    res.status(200).json(foundUserDoc);
   } catch (err) { sendErrorResponse(err, res); }
 };
 
@@ -34,7 +33,6 @@ const create = async (req, res) => {
       password,
       role,
       cartItems,
-      favoredPaintings,
       img,
     } = requestData;
 
@@ -43,11 +41,10 @@ const create = async (req, res) => {
       password: await hashPassword(password),
       role,
       cartItems,
-      favoredPaintings,
       img
     });
 
-    res.status(201).json(createUserViewModel(newUserDoc))
+    res.status(201).json(newUserDoc)
 
   } catch (err) { sendErrorResponse(err, res); }
 };
@@ -63,7 +60,6 @@ const replace = async (req, res) => {
       password,
       role,
       cartItems,
-      favoredPaintings,
       img,
     } = requestData;
 
@@ -77,7 +73,6 @@ const replace = async (req, res) => {
         password: await hashPassword(password),
         role,
         cartItems,
-        favoredPaintings,
         img,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -88,7 +83,7 @@ const replace = async (req, res) => {
       }
     );
 
-    res.status(200).json(createUserViewModel(replacedUserDoc))
+    res.status(200).json(replacedUserDoc)
 
   } catch (err) { sendErrorResponse(err, res); }
 };
@@ -104,7 +99,6 @@ const update = async (req, res) => {
       password,
       role,
       cartItems,
-      favoredPaintings,
       img,
     } = requestData;
 
@@ -115,7 +109,6 @@ const update = async (req, res) => {
         password: password && await hashPassword(password),
         role,
         cartItems,
-        favoredPaintings,
         img
       },
       { new: true }
@@ -123,7 +116,7 @@ const update = async (req, res) => {
 
     if (updatedUserDoc === null) throw createUserNotFoundError(userId);
 
-    res.status(200).json(createUserViewModel(updatedUserDoc))
+    res.status(200).json(updatedUserDoc)
 
   } catch (err) { sendErrorResponse(err, res); }
 };
@@ -132,10 +125,10 @@ const remove = async (req, res) => {
   const userId = req.params.id;
 
   try {
-    const deletedUserDoc = await UserModel.findByIdAndDelete(userId);
-    if (deletedUserDoc === null) createUserNotFoundError(userId);
+    const deletedUser = await UserModel.findByIdAndDelete(userId);
+    if (deletedUser === null) createUserNotFoundError(userId);
 
-    res.status(200).json(createUserViewModel(deletedUserDoc));
+    res.status(200).json(deletedUser);
   } catch (err) { sendErrorResponse(err, res); }
 };
 

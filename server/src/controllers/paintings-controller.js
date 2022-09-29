@@ -4,7 +4,7 @@ const PaintingModel = require('../models/painting-model');
 const createPaintingPopulatedViewModel = require('../view-models/create-painting-populated-view-model');
 const createPaintingViewModel = require('../view-models/create-painting-view-model');
 
-const createPaintingNotFoundError = (paintingId) => createNotFoundError(`Cup wPainting id '${paintingId}' was not found`);
+const createPaintingNotFoundError = (paintingId) => createNotFoundError(`Painting id '${paintingId}' was not found`);
 
 const fetchAll = async (req, res) => {
   const { joinBy, id, price_lte, price_gte, categoryId } = req.query;
@@ -66,8 +66,8 @@ const create = async (req, res) => {
 
 const replace = async (req, res) => {
   const paintingId = req.params.id;
-  const { title, description, categoryId, images, price } = req.body;
-  const newPaintingData = { title, description, categoryId, images, price };
+  const { title, description, categoryId, images, author, price } = req.body;
+  const newPaintingData = { title, description, categoryId, images, author, price };
 
   try {
     await PaintingModel.validateData(newPaintingData);
@@ -87,8 +87,8 @@ const replace = async (req, res) => {
 
 const update = async (req, res) => {
   const paintingId = req.params.id;
-  const { title, description, categoryId, images, price } = req.body;
-  const newPaintingData = removeEmptyProps({ title, description, categoryId, images, price });
+  const { title, description, categoryId, images, author, price } = req.body;
+  const newPaintingData = removeEmptyProps({ title, description, categoryId, images, author, price });
 
   try {
     await PaintingModel.validateUpdateData(newPaintingData);

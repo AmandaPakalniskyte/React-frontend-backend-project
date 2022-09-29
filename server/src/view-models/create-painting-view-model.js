@@ -4,7 +4,6 @@ const createPaintingViewModel = (paintingDoc) => ({
   author: paintingDoc.author,
   description: paintingDoc.description,
   categoryId: paintingDoc.categoryId.toString(),
-  sizeId: paintingDoc.categoryId.toString(),
   images: paintingDoc.images,
   price: paintingDoc.price,
   createdAt: paintingDoc.createdAt,
