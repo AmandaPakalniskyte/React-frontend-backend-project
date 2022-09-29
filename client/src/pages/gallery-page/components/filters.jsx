@@ -13,7 +13,6 @@ import RangeField from '../../../components/range-field';
 import SelectField from '../../../components/select-field';
 import CheckboxField from '../../../components/checkbox-field';
 import SizeService from '../../../services/size-service';
-import ColorService from '../../../services/color-service';
 import CategoryService from '../../../services/category-service';
 
 const MIN = 39;
@@ -26,12 +25,10 @@ const Filters = ({ drawerWidth }) => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [categories, setCategories] = React.useState([]);
   const [sizes, setSizes] = React.useState([]);
-  const [colors, setColors] = React.useState([]);
 
   const [priceRange, setPriceRange] = React.useState([0, 200]);
   const [category, setCategory] = React.useState(null);
   const [selectedSizes, setSelectedSizes] = React.useState([]);
-  const [selectedColors, setSelectedColors] = React.useState([]);
 
   const handlePriceRangeChange = (_, [min, max]) => {
     if (min === MIN) {
@@ -68,31 +65,20 @@ const Filters = ({ drawerWidth }) => {
     setSelectedSizes(newSizes);
   };
 
-  const handleColorChange = (_, newColors) => {
-    const ids = newColors.map((color) => color.id);
-    searchParams.delete('colorId');
-    ids.forEach((id) => searchParams.append('colorId', id));
-
-    setSearchParams(searchParams);
-    setSelectedColors(newColors);
-  };
-
   const deleteFilters = () => {
     searchParams.delete('price_gte');
     searchParams.delete('price_lte');
     searchParams.delete('categoryId');
     searchParams.delete('sizeId');
-    searchParams.delete('colorId');
 
     setSearchParams(searchParams);
   };
 
   React.useEffect(() => {
     (async () => {
-      const [fetchedCategories, fetchedSizes, fetchedColors] = await Promise.all([
+      const [fetchedCategories, fetchedSizes] = await Promise.all([
         CategoryService.fetchAll(),
         SizeService.fetchAll(),
-        ColorService.fetchAll(),
       ]);
       const priceMinInit = searchParams.get('price_gte') ?? MIN;
       const priceMaxInit = searchParams.get('price_lte') ?? MAX;
@@ -110,15 +96,8 @@ const Filters = ({ drawerWidth }) => {
         .filter((size) => size !== undefined);
       setSelectedSizes(selectedSizesInit);
 
-      const selectedColorsInit = searchParams
-        .getAll('colorId')
-        .map((id) => fetchedColors.find((color) => color.id === id))
-        .filter((color) => color !== undefined);
-      setSelectedColors(selectedColorsInit);
-
       setCategories(fetchedCategories);
       setSizes(fetchedSizes);
-      setColors(fetchedColors);
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -163,19 +142,11 @@ const Filters = ({ drawerWidth }) => {
             min={MIN}
             max={MAX}
           />
-
           <Divider sx={{ my: 2 }} />
           <SelectField
             options={categories}
             value={category}
             onChange={handleCategoryChange}
-          />
-          <Divider sx={{ my: 2 }} />
-          <CheckboxField
-            label="Spalvos"
-            options={colors}
-            value={selectedColors}
-            onChange={handleColorChange}
           />
           <Divider sx={{ my: 2 }} />
           <CheckboxField

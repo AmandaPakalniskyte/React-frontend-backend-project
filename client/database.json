@@ -13,7 +13,6 @@
       ],
       "price": 50,
       "sizeId": 1,
-      "colorId": 1,
       "liked": false
     },
     {
@@ -29,7 +28,6 @@
       ],
       "price": 80,
       "sizeId": 2,
-      "colorId": 1,
       "liked": true
     },
     {
@@ -45,7 +43,6 @@
       ],
       "price": 95,
       "sizeId": 3,
-      "colorId": 1,
       "liked": true
     },
     {
@@ -61,7 +58,6 @@
       ],
       "price": 55,
       "sizeId": 4,
-      "colorId": 1,
       "liked": false
     },
     {
@@ -77,7 +73,6 @@
       ],
       "price": 80,
       "sizeId": 1,
-      "colorId": 1,
       "liked": false
     },
     {
@@ -93,7 +88,6 @@
       ],
       "price": 39,
       "sizeId": 2,
-      "colorId": 1,
       "liked": false
     },
     {
@@ -109,7 +103,6 @@
       ],
       "price": 80,
       "sizeId": 2,
-      "colorId": 1,
       "liked": false
     },
     {
@@ -125,7 +118,6 @@
       ],
       "price": 72,
       "sizeId": 3,
-      "colorId": 2,
       "liked": false
     },
     {
@@ -141,7 +133,6 @@
       ],
       "price": 50,
       "sizeId": 4,
-      "colorId": 1,
       "liked": false
     },
     {
@@ -157,7 +148,6 @@
       ],
       "price": 32,
       "sizeId": 4,
-      "colorId": 2,
       "liked": false
     },
     {
@@ -173,7 +163,6 @@
       ],
       "price": 40,
       "sizeId": 2,
-      "colorId": 1,
       "liked": false
     },
     {
@@ -189,7 +178,6 @@
       ],
       "price": 46,
       "sizeId": 2,
-      "colorId": 1,
       "liked": false
     }
   ],
@@ -205,20 +193,6 @@
     {
       "id": "3",
       "label": "Portretas"
-    }
-  ],
-  "colors": [
-    {
-      "id": "1",
-      "label": "Ryškios"
-    },
-    {
-      "id": "2",
-      "label": "Pastelinės"
-    },
-    {
-      "id": "3",
-      "label": "Nespalvotas"
     }
   ],
   "sizes": [
