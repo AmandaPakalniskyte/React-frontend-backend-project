@@ -2,6 +2,7 @@ const { createNotFoundError, sendErrorResponse } = require('../helpers/errors');
 const { hashPassword, comparePasswords } = require('../helpers/password-encryption');
 const { createToken } = require('../helpers/token');
 const UserModel = require('../models/user-model');
+const createUserViewModel = require('../view-models/create-user-view-model');
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -18,7 +19,7 @@ const login = async (req, res) => {
     if (!passwordIsCorrect) throw new Error(`Password is incorrect`);
 
     res.status(200).json({
-      user: userDoc,
+      user: createUserViewModel(userDoc),
       token: createToken({ email: userDoc.email, role: userDoc.role })
     });
   } catch (err) {
@@ -40,7 +41,7 @@ const register = async (req, res) => {
     });
 
     res.status(201).json({
-      user: userDoc,
+      user: createUserViewModel(userDoc),
       token: createToken({ email: userDoc.email, role: userDoc.role })
     })
 

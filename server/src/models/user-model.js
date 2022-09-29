@@ -7,10 +7,6 @@ const userSchema = Schema({
     type: String,
     required: true,
   },
-  fullname: {
-    type: String,
-    required: true,
-  },
   password: {
     type: String,
     required: true,
@@ -80,10 +76,6 @@ const userValidationSchema = yup.object({
       }
     ),
 
-  fullname: yup
-    .string().typeError('User.fullname must be a string')
-    .required('User.fullname is required'),
-
   password: yup.string().typeError('User.password must be a string')
     .required('User.password is required')
     .min(8, 'User.password must have at least 8 symbols')
@@ -118,8 +110,6 @@ const userUpdateValidationSchema = yup.object({
         return foundUser === null;
       }
     ),
-
-  fullname: yup.string().typeError('User.fullname must be a string'),
 
   password: yup
     .string().typeError('User.password must be a string')
