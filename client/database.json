@@ -12,7 +12,8 @@
         "/bold-wall-dark.jpg"
       ],
       "price": 50,
-      "sizeId": 1
+      "sizeId": 1,
+      "liked": true
     },
     {
       "id": "D23A657F-CBEC-9639-2E85-7CA56B098603",
