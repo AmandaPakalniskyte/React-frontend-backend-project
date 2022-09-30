@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 const yup = require('yup');
 
 const categorySchema = Schema({
-  title: {
+  label: {
     type: String,
     required: true,
   },
@@ -11,13 +11,13 @@ const categorySchema = Schema({
 });
 
 const categoryValidationSchema = yup.object().shape({
-  title: yup
-    .string().typeError('Category.title must be a string')
-    .required('Category.title is required'),
+  label: yup
+    .string().typeError('Category.label must be a string')
+    .required('Category.label is required'),
 });
 
 const categoryUpdateValidationSchema = yup.object().shape({
-  title: yup.string().typeError('Category.title must be a string'),
+  label: yup.string().typeError('Category.label must be a string'),
 });
 
 categorySchema.statics.validateData = (categoryData) => categoryValidationSchema.validate(categoryData)

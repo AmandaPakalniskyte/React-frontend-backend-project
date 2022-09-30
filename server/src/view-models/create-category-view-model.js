@@ -1,6 +1,6 @@
 const createCategoryViewModel = (categoryDoc) => ({
   id: categoryDoc._id.toString(),
-  title: categoryDoc.title,
+  label: categoryDoc.label,
   createdAt: categoryDoc.createdAt,
   updatedAt: categoryDoc.updatedAt,
 });

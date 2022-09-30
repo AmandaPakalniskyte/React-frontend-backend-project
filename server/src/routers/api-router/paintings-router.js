@@ -6,14 +6,14 @@ const {
   replace,
   update,
   remove,
-  getPriceRange,
+  // getPriceRange,
 } = require('../../controllers/paintings-controller');
 
 const paintingsRouter = Router();
 
 paintingsRouter.get('/', fetchAll);
 
-paintingsRouter.get('/price-range', getPriceRange);
+// paintingsRouter.get('/price-range', getPriceRange);
 
 paintingsRouter.get('/:id', fetch);
 

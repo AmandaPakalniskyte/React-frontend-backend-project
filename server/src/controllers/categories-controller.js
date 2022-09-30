@@ -38,8 +38,8 @@ const create = async (req, res) => {
 
 const replace = async (req, res) => {
   const categoryId = req.params.id;
-  const { title, image } = req.body;
-  const newCategoryData = { title, image };
+  const { label } = req.body;
+  const newCategoryData = { label};
 
   try {
     await CategoryModel.validateData(newCategoryData);
@@ -59,8 +59,8 @@ const replace = async (req, res) => {
 
 const update = async (req, res) => {
   const categoryId = req.params.id;
-  const { title, image } = req.body;
-  const newCategoryData = removeEmptyProps({ title, image });
+  const { label} = req.body;
+  const newCategoryData = removeEmptyProps({ label});
 
   try {
     await CategoryModel.validateUpdateData(newCategoryData);

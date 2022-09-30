@@ -14,8 +14,11 @@ const paintingSchema = Schema({
     type: String,
     required: true,
   },
-
-  images: {
+  img: {
+    type: String,
+    // default: [],
+  },
+  imgWall: {
     type: [String],
     default: [],
   },
@@ -42,7 +45,9 @@ const paintingValidationSchema = yup.object().shape({
   description: yup
     .string().typeError('Painting.description must be a string')
     .required('Painting.description is required'),
-  images: yup.array(yup.string().typeError('Painting.img must be a string')),
+  img: yup
+    .string().typeError('Painting.img must be a string'),
+  imgWall: yup.array(yup.string().typeError('Painting.imgWall must be a string')),
   price: yup
     .number().typeError('Painting.price must be a number')
     .required('Painting.price is required')
@@ -61,7 +66,8 @@ const paintingUpdateValidationSchema = yup.object().shape({
   title: yup.string().typeError('Painting.title must be a string'),
   author: yup.string().typeError('Painting.author must be a string'),
   description: yup.string().typeError('Painting.description must be a string'),
-  images: yup.array(yup.string().typeError('Painting.img must be a string')),
+  img: yup.string().typeError('Painting.img must be a string'),
+  imgWall: yup.array(yup.string().typeError('Painting.imgWall must be a string')),
   price: yup.number()
     .typeError('Painting.price must be a number')
     .positive('Painting.price must be positive'),
