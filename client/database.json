@@ -11,8 +11,7 @@
         "/bold-wall.jpg",
         "/bold-wall-dark.jpg"
       ],
-      "price": 50,
-      "sizeId": 1
+      "price": 50
     },
     {
       "id": "D23A657F-CBEC-9639-2E85-7CA56B098603",
@@ -25,9 +24,7 @@
         "/chaos-wall.jpg",
         "/chaos-wall-dark.jpg"
       ],
-      "price": 80,
-      "sizeId": 2,
-      "liked": true
+      "price": 80
     },
     {
       "id": "12A4CD9E-F969-7106-0E70-A8214ED12111",
@@ -40,8 +37,7 @@
         "/color-wall.jpg",
         "/color-wall-dark.jpg"
       ],
-      "price": 95,
-      "sizeId": 3
+      "price": 95
     },
     {
       "id": "5F7922A2-19DB-CAD4-4291-1B137C44D066",
@@ -54,8 +50,7 @@
         "/dark-wall.jpg",
         "/dark-wall-dark.jpg"
       ],
-      "price": 55,
-      "sizeId": 4
+      "price": 55
     },
     {
       "id": "815C5D64-820D-2DCD-10AA-59EE2D0BC780",
@@ -68,8 +63,7 @@
         "/eyes-wall.jpg",
         "/eyes-wall-dark.jpg"
       ],
-      "price": 80,
-      "sizeId": 1
+      "price": 80
     },
     {
       "id": "9DB881E2-10C5-C379-E7A3-1C5836853892",
@@ -82,8 +76,7 @@
         "/flower-wall.jpg",
         "/flower-wall-dark.jpg"
       ],
-      "price": 39,
-      "sizeId": 2
+      "price": 39
     },
     {
       "id": "E9522542-AB55-9279-A13C-03645AE88D28",
@@ -96,8 +89,7 @@
         "/flowers-wall.jpg",
         "/flowers-wall-dark.jpg"
       ],
-      "price": 80,
-      "sizeId": 2
+      "price": 80
     },
     {
       "id": "25D5DF9E-91AA-0358-D7DA-A70C6C448F2A",
@@ -110,8 +102,7 @@
         "/mister-wall.jpg",
         "/mister-wall-dark.jpg"
       ],
-      "price": 72,
-      "sizeId": 3
+      "price": 72
     },
     {
       "id": "F1BB0713-A37A-9766-7896-26BDADC62132",
@@ -124,8 +115,7 @@
         "/scales-wall.jpg",
         "/scales-wall-dark.jpg"
       ],
-      "price": 50,
-      "sizeId": 4
+      "price": 50
     },
     {
       "id": "FDEA9082-2D95-F3B3-A5B2-F851EC375AAC",
@@ -138,8 +128,7 @@
         "/sea-wall.jpg",
         "/sea-wall-dark.jpg"
       ],
-      "price": 32,
-      "sizeId": 4
+      "price": 32
     },
     {
       "id": "6B09AC86-EBD2-41B1-1733-2AEEFE491165",
@@ -152,8 +141,7 @@
         "/strikes-wall.jpg",
         "/strikes-wall-dark.jpg"
       ],
-      "price": 40,
-      "sizeId": 2
+      "price": 40
     },
     {
       "id": "A565A92E-71B7-BEC0-EB49-A8E5B52DB31B",
@@ -166,8 +154,7 @@
         "/sunset-wall.jpg",
         "/sunset-wall-dark.jpg"
       ],
-      "price": 46,
-      "sizeId": 2
+      "price": 46
     }
   ],
   "categories": [
@@ -182,24 +169,6 @@
     {
       "id": "3",
       "label": "Portretas"
-    }
-  ],
-  "sizes": [
-    {
-      "id": "1",
-      "label": "60 x 80"
-    },
-    {
-      "id": "2",
-      "label": "80 x100"
-    },
-    {
-      "id": "3",
-      "label": "100 x 100"
-    },
-    {
-      "id": "4",
-      "label": "120 x 160"
     }
   ]
 }
