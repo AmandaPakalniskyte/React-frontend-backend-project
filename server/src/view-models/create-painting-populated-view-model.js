@@ -6,6 +6,7 @@ const createPaintingPopulatedViewModel = (paintingPopulatedDoc) => ({
   author: paintingPopulatedDoc.author,
   description: paintingPopulatedDoc.description,
   category: createCategoryViewModel(paintingPopulatedDoc.categoryId),
+  size: createSizeViewModel(paintingPopulatedDoc.sizeId),
   img: paintingPopulatedDoc.img,
   imgWall: paintingDoc.imgWall,
   price: paintingPopulatedDoc.price,
