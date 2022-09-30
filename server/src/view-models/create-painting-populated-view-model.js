@@ -1,4 +1,5 @@
 const createCategoryViewModel = require("./create-category-view-model");
+const createSizeViewModel = require("./create-size-view-model");
 
 const createPaintingPopulatedViewModel = (paintingPopulatedDoc) => ({
   id: paintingPopulatedDoc._id.toString(),
@@ -8,7 +9,7 @@ const createPaintingPopulatedViewModel = (paintingPopulatedDoc) => ({
   category: createCategoryViewModel(paintingPopulatedDoc.categoryId),
   size: createSizeViewModel(paintingPopulatedDoc.sizeId),
   img: paintingPopulatedDoc.img,
-  imgWall: paintingDoc.imgWall,
+  imgWall: paintingPopulatedDoc.imgWall,
   price: paintingPopulatedDoc.price,
   createdAt: paintingPopulatedDoc.createdAt,
   updatedAt: paintingPopulatedDoc.updatedAt,
