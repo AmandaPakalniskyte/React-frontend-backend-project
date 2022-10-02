@@ -6,7 +6,7 @@ import ItemSmall from './components/item/item-grid-small-screen';
 import TotalSection from './components/total-section';
 
 const fetchItem = async ({ id, count }) => {
-  const response = await fetch(`http://localhost:8000/paintings/${id}`);
+  const response = await fetch(`http://localhost:8000/api/paintings/${id}`);
   const item = await response.json();
 
   return {

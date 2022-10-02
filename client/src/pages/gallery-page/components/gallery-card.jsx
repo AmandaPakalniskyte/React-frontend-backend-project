@@ -71,6 +71,7 @@ const GalleryCard = ({
         }}
         >
           {size.label}
+          Neveikia
         </Item>
         <Image src={img} sx={{ position: 'absolute', top: 0, left: 0 }} />
       </Box>

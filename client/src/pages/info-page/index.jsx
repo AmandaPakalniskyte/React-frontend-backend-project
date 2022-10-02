@@ -13,7 +13,7 @@ const InfoPage = () => {
   const [painting, setPainting] = React.useState(null);
 
   const fetchPainting = React.useCallback(async () => {
-    const response = await fetch(`http://localhost:8000/paintings/${id}`);
+    const response = await fetch(`http://localhost:8000/api/paintings/${id}`);
     const fetchedPainting = await response.json();
 
     setPainting(fetchedPainting);

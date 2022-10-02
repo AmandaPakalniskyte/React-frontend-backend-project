@@ -1,6 +1,7 @@
 const domain = 'http://localhost:8000';
-const collectionName = 'paintings';
-const relationsParams = '_expand=category&_expand=size';
+const collectionName = 'api/paintings';
+const relationsParams = 'joinBy=categoryId&_joinBy=sizeId';
+// const relationsParams = 'joinBy=categoryId&_joinBy=sizeId';
 
 const fetchAll = async (paramsString = null) => {
   const urlParamsString = paramsString ? `&${paramsString}` : '';

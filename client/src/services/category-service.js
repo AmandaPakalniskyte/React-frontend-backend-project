@@ -1,7 +1,7 @@
 const domain = 'http://localhost:8000';
 
 const fetchAll = async () => {
-  const response = await fetch(`${domain}/categories`);
+  const response = await fetch(`${domain}/api/categories`);
   const categories = await response.json();
 
   return categories;
