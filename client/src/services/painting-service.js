@@ -40,11 +40,19 @@ const update = async ({ id, ...updateProps }) => {
   return responseData;
 };
 
+const getPriceRange = async () => {
+  const response = await fetch(`${domain}/${collectionName}/price-range`);
+  const priceRange = await response.json();
+
+  return priceRange;
+};
+
 const PaintingService = {
   fetchAll,
   update,
   fetchById,
   fetchByIdArr,
+  getPriceRange,
 };
 
 export default PaintingService;

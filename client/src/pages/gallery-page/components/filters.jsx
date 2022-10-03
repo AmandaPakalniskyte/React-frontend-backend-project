@@ -12,11 +12,9 @@ import { useSearchParams } from 'react-router-dom';
 import RangeField from '../../../components/range-field';
 import SelectField from '../../../components/select-field';
 import CheckboxField from '../../../components/checkbox-field';
+import PaintingService from '../../../services/painting-service';
 import SizeService from '../../../services/size-service';
 import CategoryService from '../../../services/category-service';
-
-const MIN = 39;
-const MAX = 95;
 
 const Filters = ({ drawerWidth }) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -26,17 +24,19 @@ const Filters = ({ drawerWidth }) => {
   const [categories, setCategories] = React.useState([]);
   const [sizes, setSizes] = React.useState([]);
 
-  const [priceRange, setPriceRange] = React.useState([0, 200]);
+  const [priceBounds, setPriceBounds] = React.useState([0, 0]);
+  const [priceRange, setPriceRange] = React.useState([0, 0]);
   const [category, setCategory] = React.useState(null);
   const [selectedSizes, setSelectedSizes] = React.useState([]);
+  const [priceLowerBound, priceHigherBound] = priceBounds;
 
   const handlePriceRangeChange = (_, [min, max]) => {
-    if (min === MIN) {
+    if (min === priceLowerBound) {
       searchParams.delete('price_gte');
     } else {
       searchParams.set('price_gte', min);
     }
-    if (max === MAX) {
+    if (max === priceHigherBound) {
       searchParams.delete('price_lte');
     } else {
       searchParams.set('price_lte', max);
@@ -76,12 +76,13 @@ const Filters = ({ drawerWidth }) => {
 
   React.useEffect(() => {
     (async () => {
-      const [fetchedCategories, fetchedSizes] = await Promise.all([
+      const [fetchedCategories, fetchedSizes, fetchedPriceRange] = await Promise.all([
         CategoryService.fetchAll(),
         SizeService.fetchAll(),
+        PaintingService.getPriceRange(),
       ]);
-      const priceMinInit = searchParams.get('price_gte') ?? MIN;
-      const priceMaxInit = searchParams.get('price_lte') ?? MAX;
+      const priceMinInit = searchParams.get('price_gte') ?? fetchedPriceRange[0];
+      const priceMaxInit = searchParams.get('price_lte') ?? fetchedPriceRange[1];
       setPriceRange([priceMinInit, priceMaxInit]);
 
       const categoryId = searchParams.get('categoryId');
@@ -98,6 +99,7 @@ const Filters = ({ drawerWidth }) => {
 
       setCategories(fetchedCategories);
       setSizes(fetchedSizes);
+      setPriceBounds(fetchedPriceRange);
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -139,8 +141,8 @@ const Filters = ({ drawerWidth }) => {
             value={priceRange}
             onChange={(_, newPriceRange) => setPriceRange(newPriceRange)}
             onChangeCommitted={handlePriceRangeChange}
-            min={MIN}
-            max={MAX}
+            min={priceLowerBound}
+            max={priceHigherBound}
           />
           <Divider sx={{ my: 2 }} />
           <SelectField
