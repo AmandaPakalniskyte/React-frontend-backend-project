@@ -7,13 +7,31 @@ const createPaintingViewModel = require('../view-models/create-painting-view-mod
 const createPaintingNotFoundError = (paintingId) => createNotFoundError(`Painting with id '${paintingId}' was not found`);
 
 const fetchAll = async (req, res) => {
-  const { joinBy } = req.query;
+  const {
+    joinBy, id, price_lte, price_gte, categoryId,
+  } = req.query;
   const joinedDocuments = joinBy === 'categoryId';
+  const filter = {};
+
+  // Query by many cup id's
+  if (id) filter._id = id instanceof Array ? { $in: id } : id;
+  if (categoryId) {
+    filter.categoryId = categoryId instanceof Array
+      ? { $in: categoryId }
+      : categoryId;
+  }
+  // Query by price range
+  if (price_lte || price_gte) {
+    filter.price = {};
+    if (price_lte) filter.price.$lte = price_lte;
+    if (price_gte) filter.price.$gte = price_gte;
+  }
+
 
   try {
     const paintingDocs = joinedDocuments
-      ? await PaintingModel.find().populate('categoryId')
-      : await PaintingModel.find();
+      ? await PaintingModel.find(filter).populate('categoryId')
+      : await PaintingModel.find(filter);
 
     res.status(200).json(joinedDocuments
       ? paintingDocs.map(createPaintingPopulatedViewModel)
