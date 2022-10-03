@@ -124,6 +124,23 @@ const remove = async (req, res) => {
   } catch (err) { sendErrorResponse(err, res); }
 };
 
+const getPriceRange = async (req, res) => {
+  const [priceRange] = await PaintingModel.aggregate(
+    [
+      {
+        $group:
+        {
+          _id: {},
+          min: { $min: '$price' },
+          max: { $max: '$price' },
+        },
+      },
+    ],
+  );
+
+  res.status(200).json([priceRange.min, priceRange.max]);
+};
+
 module.exports = {
   fetchAll,
   fetch,
@@ -131,4 +148,5 @@ module.exports = {
   replace,
   update,
   remove,
+  getPriceRange,
 };
