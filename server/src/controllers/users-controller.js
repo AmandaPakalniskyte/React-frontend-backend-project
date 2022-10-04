@@ -32,6 +32,8 @@ const create = async (req, res) => {
     const {
       email,
       password,
+      firstName,
+      surname,
       role,
       cartItems,
       favoredCups,
@@ -41,6 +43,8 @@ const create = async (req, res) => {
     const newUserDoc = await UserModel.create({
       email,
       password: await hashPassword(password),
+      firstName,
+      surname,
       role,
       cartItems,
       favoredCups,
@@ -61,6 +65,8 @@ const replace = async (req, res) => {
     const {
       email,
       password,
+      firstName,
+      surname,
       role,
       cartItems,
       favoredCups,
@@ -75,6 +81,8 @@ const replace = async (req, res) => {
       {
         email,
         password: await hashPassword(password),
+        firstName,
+        surname,
         role,
         cartItems,
         favoredCups,

@@ -32,12 +32,14 @@ const register = async (req, res) => {
 
   try {
     await UserModel.validateData(requestData);
-    const { email, password, img, } = requestData;
+    const { email, password, img, firstName, surname } = requestData;
 
     const userDoc = await UserModel.create({
       email,
       password: await hashPassword(password),
-      img
+      img,
+      firstName,
+      surname
     });
 
     res.status(201).json({
