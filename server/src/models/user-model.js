@@ -11,7 +11,7 @@ const userSchema = Schema({
     type: String,
     required: true,
   },
-  name: {
+  firstName: {
     type: String,
     required: true,
   },
@@ -97,7 +97,7 @@ const userValidationSchema = yup.object({
     .required('User.passwordConfirmation is required')
     .oneOf([yup.ref('password')], 'User.passwordConfirmation does not match User.password'),
 
-  name: yup
+  firstName: yup
     .string().typeError('User.email must be a string')
     .required('User.email is required'),
   
@@ -139,7 +139,7 @@ const userUpdateValidationSchema = yup.object({
 
   passwordConfirmation: yup.string().typeError('User.passwordConfirmation must be a string'),
 
-  name: yup
+  firstName: yup
     .string().typeError('User.email must be a string')
     .required('User.email is required'),
   
