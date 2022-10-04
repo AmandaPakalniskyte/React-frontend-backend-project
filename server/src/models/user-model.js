@@ -11,6 +11,14 @@ const userSchema = Schema({
     type: String,
     required: true,
   },
+  name: {
+    type: String,
+    required: true,
+  },
+  surname: {
+    type: String,
+    required: true,
+  },
   role: {
     type: String,
     enum: ['USER', 'ADMIN'],
@@ -89,6 +97,14 @@ const userValidationSchema = yup.object({
     .required('User.passwordConfirmation is required')
     .oneOf([yup.ref('password')], 'User.passwordConfirmation does not match User.password'),
 
+  name: yup
+    .string().typeError('User.email must be a string')
+    .required('User.email is required'),
+  
+  surname: yup
+    .string().typeError('User.email must be a string')
+    .required('User.email is required'),
+
   role: yup.string().typeError('User.role must be a string')
     .oneOf(['USER', 'ADMIN']),
 
@@ -122,6 +138,14 @@ const userUpdateValidationSchema = yup.object({
     .oneOf([yup.ref('passwordConfirmation')], 'User.password does not match User.passwordConfirmation'),
 
   passwordConfirmation: yup.string().typeError('User.passwordConfirmation must be a string'),
+
+  name: yup
+    .string().typeError('User.email must be a string')
+    .required('User.email is required'),
+  
+  surname: yup
+    .string().typeError('User.email must be a string')
+    .required('User.email is required'),
 
   role: yup.string().typeError('User.role must be a string')
     .oneOf(['USER', 'ADMIN']),
