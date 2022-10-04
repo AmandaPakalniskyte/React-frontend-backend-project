@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import React from 'react';
 import {
   Paper,
@@ -5,9 +6,11 @@ import {
   TextField,
   Box,
   Button,
+  Alert,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import AuthService from '../../services/auth-service';
 
 const initialValues = {
   email: '',
@@ -28,24 +31,36 @@ const validationSchema = yup.object({
 });
 
 const LoginPage = () => {
-  const onSubmit = async (values) => {
-    console.log('Forma patvirtinta, atliekami veiksmai...');
-    console.log(values);
-  };
+  const [authError, setAuthError] = React.useState(null);
+
+  const onSubmitRef = React.useRef(async (credentials) => {
+    setAuthError(null);
+    try {
+      const authData = await AuthService.login(credentials);
+
+      console.log(authData);
+    } catch (error) {
+      setAuthError(error.message);
+    } finally {
+      resetForm();
+    }
+  });
 
   const {
     dirty, values, errors, touched, isValid,
-    handleChange, handleBlur, handleSubmit,
+    handleChange, handleBlur, handleSubmit, resetForm,
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit,
+    onSubmit: onSubmitRef.current,
   });
 
   return (
     <Box sx={() => ({
       display: 'flex',
-      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'column',
+      gap: '20px',
       py: {
         lg: 10,
         md: 10,
@@ -60,6 +75,16 @@ const LoginPage = () => {
       },
     })}
     >
+      {authError
+      && (
+      <Alert
+        severity="error"
+        onClose={() => setAuthError(null)}
+      >
+        {authError}
+
+      </Alert>
+      )}
       <Paper sx={{
         p: 5,
         height: '400px',
