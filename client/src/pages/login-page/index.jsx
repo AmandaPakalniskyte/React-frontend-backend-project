@@ -10,7 +10,9 @@ import {
 } from '@mui/material';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import AuthService from '../../services/auth-service';
+import { useSearchParams } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
+import { authClearErrorsAction, createLoginThunkAction } from '../../store/auth/auth-actions';
 
 const initialValues = {
   email: '',
@@ -31,24 +33,18 @@ const validationSchema = yup.object({
 });
 
 const LoginPage = () => {
-  const [authError, setAuthError] = React.useState(null);
+  const { error, dispatch } = useAuth();
+  const [serachParams] = useSearchParams();
 
-  const onSubmitRef = React.useRef(async (credentials) => {
-    setAuthError(null);
-    try {
-      const authData = await AuthService.login(credentials);
-
-      console.log(authData);
-    } catch (error) {
-      setAuthError(error.message);
-    } finally {
-      resetForm();
-    }
+  const onSubmitRef = React.useRef((credentials) => {
+    const redirect = serachParams.get('redirect');
+    dispatch(createLoginThunkAction(credentials, redirect));
+    // eslint-disable-next-line no-use-before-define
+    resetForm();
   });
 
   const {
-    dirty, values, errors, touched, isValid,
-    handleChange, handleBlur, handleSubmit, resetForm,
+    dirty, values, errors, touched, isValid, handleChange, handleBlur, handleSubmit, resetForm,
   } = useFormik({
     initialValues,
     validationSchema,
@@ -75,14 +71,13 @@ const LoginPage = () => {
       },
     })}
     >
-      {authError
+      {error
       && (
       <Alert
         severity="error"
-        onClose={() => setAuthError(null)}
+        onClose={() => dispatch(authClearErrorsAction)}
       >
-        {authError}
-
+          {error}
       </Alert>
       )}
       <Paper sx={{

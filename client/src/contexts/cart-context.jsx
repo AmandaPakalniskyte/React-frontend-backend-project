@@ -1,12 +1,11 @@
 import * as React from 'react';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const CartContext = React.createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = React.useState([]);
+  const [cartItems, setCartItems] = useLocalStorage('cartItems', []);
 
-  // React.useMemo( FUNKCIJA_KURI_GRĄŽINA_REIKŠMĘ, MASYVAS_SU_STEBIMAIS_KINTAMAISIAIS)
-  // Kuomet keičiasi stebimi kintamieji, perskaičiuojama reikšmė kviečiant funkciją pirmu argumentu
   const cartContextValue = React.useMemo(() => ({
     cartItems,
 
@@ -27,7 +26,7 @@ export const CartProvider = ({ children }) => {
     getItemCount: (id) => cartItems.find((x) => x.id === id)?.count ?? 0,
 
     deleteItem: (id) => setCartItems(cartItems.filter((x) => x.id !== id)),
-  }), [cartItems]);
+  }), [cartItems, setCartItems]);
 
   return (
     <CartContext.Provider value={cartContextValue}>{children}</CartContext.Provider>

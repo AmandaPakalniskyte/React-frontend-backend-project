@@ -7,6 +7,7 @@ import {
   Drawer,
   useMediaQuery,
   CardMedia,
+  // Typography,
 } from '@mui/material';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -15,13 +16,14 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from 'react-router-dom';
 import * as Nav from './components';
 import CartContext from '../../contexts/cart-context';
+import useAuth from '../../hooks/useAuth';
 
 const links = [
   { text: 'PAGRINDINIS', to: '/' },
   { text: 'KONCEPTAS', to: '/concept' },
   { text: 'PAVEIKSLŲ GALERIJA', to: '/gallery' },
-  { text: 'PRISIJUNGTI', to: '/login' },
-  { text: 'REGISTRUOTIS', to: '/register' },
+  // { text: 'PRISIJUNGTI', to: '/login' },
+  // { text: 'REGISTRUOTIS', to: '/register' },
 ];
 
 const expandBr = 'xl';
@@ -31,6 +33,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const isContracted = useMediaQuery((theme) => theme.breakpoints.down(expandBr));
   const [open, setOpen] = React.useState(false);
+  const { loggedIn } = useAuth();
 
   React.useEffect(() => {
     if (!isContracted && open) {
@@ -79,6 +82,15 @@ const Navbar = () => {
         }}
         >
           {links.map(({ text, to }) => <Nav.Link key={to} to={to}>{text}</Nav.Link>)}
+          {loggedIn ? (
+            <Box>Profilis</Box>
+          ) : (
+            <>
+
+              <Nav.Link to="/login" onClick={() => setOpen(false)}>PRISIJUNGTI</Nav.Link>
+              <Nav.Link to="/register" onClick={() => setOpen(false)}>REGISTRUOTIS</Nav.Link>
+            </>
+          )}
         </Box>
 
         {isContracted && (
@@ -105,7 +117,17 @@ const Navbar = () => {
                 {text}
               </Nav.Link>
             ))}
+            {loggedIn ? (
+              <Box>Profilis</Box>
+            ) : (
+              <>
+
+                <Nav.Link to="/login" onClick={() => setOpen(false)}>PRISIJUNGTI</Nav.Link>
+                <Nav.Link to="/register" onClick={() => setOpen(false)}>REGISTRUOTIS</Nav.Link>
+              </>
+            )}
           </Box>
+          <Box color="white">labas</Box>
         </Drawer>
         )}
         <Box>
