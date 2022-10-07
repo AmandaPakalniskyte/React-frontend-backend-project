@@ -48,9 +48,18 @@ const register = async (req, res) => {
     })
 
   } catch (err) { sendErrorResponse(err, res); }
-}
+};
+
+const auth = async (req, res) => {
+  res.status(201).json({
+    user: createUserViewModel(req.authUser),
+    token: createToken({ email: req.authUser.email, role: req.authUser.role }),
+  });
+};
+
 
 module.exports = {
   login,
   register,
+  auth,
 };
