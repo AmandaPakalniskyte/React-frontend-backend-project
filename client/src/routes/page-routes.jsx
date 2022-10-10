@@ -11,7 +11,7 @@ import GuestRegisterPage from '../pages/guest-register-page';
 import LoginPage from '../pages/login-page';
 import RegisterPage from '../pages/register-page';
 import ErrorPage from '../pages/error-page';
-
+import ProfilePage from '../pages/profile-page';
 import RequireVisitor from './require-visitor';
 // import RequireAuth from './require-auth';
 
@@ -24,6 +24,7 @@ const PageRoutes = () => (
       <Route path="/favourites" element={<FavouritesPage />} />
       <Route path="/order" element={<OrderPage />} />
       <Route path="/contact" element={<GuestRegisterPage />} />
+      <Route path="/profile" element={<ProfilePage />} />
 
       <Route path="/register" element={<RequireVisitor><RegisterPage /></RequireVisitor>} />
       <Route path="/login" element={<RequireVisitor><LoginPage /></RequireVisitor>} />
