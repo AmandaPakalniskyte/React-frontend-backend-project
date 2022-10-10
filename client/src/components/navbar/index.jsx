@@ -7,8 +7,13 @@ import {
   Drawer,
   useMediaQuery,
   CardMedia,
-  // Typography,
+  Avatar,
+  Menu,
+  MenuItem,
+  Typography,
 } from '@mui/material';
+import LogoutIcon from '@mui/icons-material/Logout';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import MenuIcon from '@mui/icons-material/Menu';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -17,6 +22,7 @@ import { useNavigate } from 'react-router-dom';
 import * as Nav from './components';
 import CartContext from '../../contexts/cart-context';
 import useAuth from '../../hooks/useAuth';
+import { authLogoutAction } from '../../store/auth/auth-actions';
 
 const links = [
   { text: 'PAGRINDINIS', to: '/' },
@@ -33,7 +39,9 @@ const Navbar = () => {
   const navigate = useNavigate();
   const isContracted = useMediaQuery((theme) => theme.breakpoints.down(expandBr));
   const [open, setOpen] = React.useState(false);
-  const { loggedIn } = useAuth();
+  const { loggedIn, user, dispatch } = useAuth();
+  const AuthMenuIconRef = React.useRef(null);
+  const [authMenuOpen, setAuthMenuOpen] = React.useState(false);
 
   React.useEffect(() => {
     if (!isContracted && open) {
@@ -82,9 +90,7 @@ const Navbar = () => {
         }}
         >
           {links.map(({ text, to }) => <Nav.Link key={to} to={to}>{text}</Nav.Link>)}
-          {loggedIn ? (
-            <Box>Profilis</Box>
-          ) : (
+          {!loggedIn && (
             <>
 
               <Nav.Link to="/login" onClick={() => setOpen(false)}>PRISIJUNGTI</Nav.Link>
@@ -117,17 +123,45 @@ const Navbar = () => {
                 {text}
               </Nav.Link>
             ))}
-            {loggedIn ? (
-              <Box>Profilis</Box>
-            ) : (
+            <Box sx={(theme) => ({
+              display: 'flex',
+              flexDirection: 'column',
+              color: theme.palette.primary.main,
+            })}
+            >
+              {!loggedIn
+              && (
               <>
 
-                <Nav.Link to="/login" onClick={() => setOpen(false)}>PRISIJUNGTI</Nav.Link>
-                <Nav.Link to="/register" onClick={() => setOpen(false)}>REGISTRUOTIS</Nav.Link>
+                <Nav.Link
+                  to="/login"
+                  sx={(theme) => ({
+                    mt: 12,
+                    fontWeight: 600,
+                    color: theme.palette.primary.main,
+                  })}
+                  onClick={() => setOpen(false)}
+                >
+                  PRISIJUNGTI
+
+                </Nav.Link>
+                <Nav.Link
+                  to="/register"
+                  sx={(theme) => ({
+                    fontWeight: 600,
+                    mt: 4,
+
+                    color: theme.palette.primary.main,
+                  })}
+                  onClick={() => setOpen(false)}
+                >
+                  REGISTRUOTIS
+
+                </Nav.Link>
               </>
-            )}
+              )}
+            </Box>
           </Box>
-          <Box color="white">labas</Box>
         </Drawer>
         )}
         <Box>
@@ -149,6 +183,62 @@ const Navbar = () => {
               <ShoppingBasketIcon />
             </Badge>
           </IconButton>
+          {loggedIn && (
+            <>
+              <IconButton
+                ref={AuthMenuIconRef}
+                onClick={() => setAuthMenuOpen(!authMenuOpen)}
+              >
+                <Avatar
+                  src={user.img}
+                  sx={(theme) => ({
+                    alignSelf: 'center',
+                    ml: 2,
+                    width: 35,
+                    height: 35,
+                    color: theme.palette.primary.main,
+                    backgroundColor: theme.palette.common.white,
+                  })}
+                >
+                  {user.firstName[0]}
+                  {user.surname[0]}
+                </Avatar>
+              </IconButton>
+              <Menu
+                sx={{ mt: '45px' }}
+                id="menu-appbar"
+                anchorEl={AuthMenuIconRef.current}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={authMenuOpen}
+                onClose={() => setAuthMenuOpen(false)}
+              >
+                <MenuItem
+                  sx={{ display: 'flex', justifyContent: 'space-between' }}
+                  onClick={() => {
+                    navigate('/profile');
+                    setAuthMenuOpen(false);
+                  }}
+                >
+                  <Typography textAlign="center">Profilis</Typography>
+                  <AccountCircleIcon sx={{ ml: 2 }} />
+                </MenuItem>
+                <MenuItem
+                  sx={{ display: 'flex', justifyContent: 'space-between' }}
+                  onClick={() => {
+                    dispatch(authLogoutAction);
+                    setAuthMenuOpen(false);
+                  }}
+                >
+                  <Typography textAlign="center">Atsijungti</Typography>
+                  <LogoutIcon sx={{ ml: 2 }} />
+                </MenuItem>
+              </Menu>
+            </>
+          )}
+
         </Box>
       </Box>
     </AppBar>
