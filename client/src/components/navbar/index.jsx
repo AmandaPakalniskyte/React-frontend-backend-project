@@ -93,8 +93,8 @@ const Navbar = () => {
           {!loggedIn && (
             <>
 
-              <Nav.Link to="/login" onClick={() => setOpen(false)}>PRISIJUNGTI</Nav.Link>
-              <Nav.Link to="/register" onClick={() => setOpen(false)}>REGISTRUOTIS</Nav.Link>
+              <Nav.Link to="/auth/login" onClick={() => setOpen(false)}>PRISIJUNGTI</Nav.Link>
+              <Nav.Link to="/auth/register" onClick={() => setOpen(false)}>REGISTRUOTIS</Nav.Link>
             </>
           )}
         </Box>
@@ -134,7 +134,7 @@ const Navbar = () => {
               <>
 
                 <Nav.Link
-                  to="/login"
+                  to="/auth/login"
                   sx={(theme) => ({
                     mt: 12,
                     fontWeight: 600,
@@ -146,7 +146,7 @@ const Navbar = () => {
 
                 </Nav.Link>
                 <Nav.Link
-                  to="/register"
+                  to="/auth/register"
                   sx={(theme) => ({
                     fontWeight: 600,
                     mt: 4,

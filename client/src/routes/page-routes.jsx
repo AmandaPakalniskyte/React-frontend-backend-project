@@ -13,7 +13,7 @@ import RegisterPage from '../pages/register-page';
 import ErrorPage from '../pages/error-page';
 import ProfilePage from '../pages/profile-page';
 import RequireVisitor from './require-visitor';
-// import RequireAuth from './require-auth';
+import RequireAuth from './require-auth';
 
 const PageRoutes = () => (
   <Routes>
@@ -24,11 +24,14 @@ const PageRoutes = () => (
       <Route path="/favourites" element={<FavouritesPage />} />
       <Route path="/order" element={<OrderPage />} />
       <Route path="/contact" element={<GuestRegisterPage />} />
-      <Route path="/profile" element={<ProfilePage />} />
-
-      <Route path="/register" element={<RequireVisitor><RegisterPage /></RequireVisitor>} />
-      <Route path="/login" element={<RequireVisitor><LoginPage /></RequireVisitor>} />
       <Route path="/info/:id" element={<InfoPage />} />
+      <Route path="profile" element={<RequireAuth><ProfilePage /></RequireAuth>} />
+
+      <Route path="auth/" element={<RequireVisitor><MainLayout /></RequireVisitor>}>
+        <Route path="register" element={<RequireVisitor><RegisterPage /></RequireVisitor>} />
+        <Route path="login" element={<RequireVisitor><LoginPage /></RequireVisitor>} />
+      </Route>
+
       <Route path="*" element={<ErrorPage />} />
     </Route>
   </Routes>
