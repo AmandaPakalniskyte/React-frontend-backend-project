@@ -36,24 +36,24 @@ const auth = async (token) => {
   return authData;
 };
 
-// const checkEmail = async (email) => {
-//   const response = await fetch(`${domain}/auth/check-email`, {
-//     method: 'POST',
-//     headers: {
-//       Accept: 'application/json',
-//       'Content-Type': 'application/json',
-//     },
+const checkEmail = async (email) => {
+  const response = await fetch(`${domain}/auth/check-email`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
 
-//     body: JSON.stringify({ email }),
-//   });
-//   const responseData = await response.json();
+    body: JSON.stringify({ email }),
+  });
+  const responseData = await response.json();
 
-//   if (response.status >= 400) {
-//     throw new Error(responseData.message);
-//   }
+  if (response.status >= 400) {
+    throw new Error(responseData.message);
+  }
 
-//   return responseData.emailAvailable;
-// };
+  return responseData.emailAvailable;
+};
 
 // const updateProfile = async ({ formData, token }) => {
 //   const response = await fetch(`${domain}/auth/update-profile`, {
@@ -76,7 +76,7 @@ const auth = async (token) => {
 const AuthService = {
   auth,
   login,
-  // checkEmail,
+  checkEmail,
   // updateProfile,
 };
 

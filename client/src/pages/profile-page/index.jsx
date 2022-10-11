@@ -168,7 +168,7 @@ const ProfilePage = () => {
               value={values.firstName}
               onChange={handleChange}
               error={Boolean(errors.firstName)}
-              helperText={errors.fullname}
+              helperText={errors.firstName}
             />
             <TextField
               fullWidth
