@@ -230,7 +230,7 @@ const Navbar = () => {
                   onClick={() => {
                     dispatch(authLogoutAction);
                     setAuthMenuOpen(false);
-                    navigate('/gallery');
+                    navigate('/auth/login');
                   }}
                 >
                   <Typography textAlign="center">Atsijungti</Typography>

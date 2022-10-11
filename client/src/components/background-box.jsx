@@ -26,6 +26,11 @@ const BackgroundBox = ({ children }) => (
     background: theme.palette.common.white,
     borderRadius: 1,
     position: 'relative',
+    jutifyContent: 'center',
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+
   })}
   >
     {children}
