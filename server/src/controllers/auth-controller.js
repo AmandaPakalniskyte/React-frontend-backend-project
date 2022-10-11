@@ -57,9 +57,21 @@ const auth = async (req, res) => {
   });
 };
 
+const checkEmail = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    if (!email) createBadDataError('Email was not found in request body');
+    const foundUser = await UserModel.findOne({ email });
+
+    res.status(200).json({ email, emailAvailable: foundUser === null });
+  } catch (err) { sendErrorResponse(err, res); }
+};
+
 
 module.exports = {
   login,
   register,
   auth,
+  checkEmail,
 };
