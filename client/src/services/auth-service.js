@@ -55,29 +55,29 @@ const checkEmail = async (email) => {
   return responseData.emailAvailable;
 };
 
-// const updateProfile = async ({ formData, token }) => {
-//   const response = await fetch(`${domain}/auth/update-profile`, {
-//     method: 'PATCH',
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
+const updateProfile = async ({ formData, token }) => {
+  const response = await fetch(`${domain}/auth/update-profile`, {
+    method: 'PATCH',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
 
-//     body: formData,
-//   });
-//   const authData = await response.json();
+    body: formData,
+  });
+  const authData = await response.json();
 
-//   if (response.status >= 400) {
-//     throw new Error(authData.message);
-//   }
+  if (response.status >= 400) {
+    throw new Error(authData.message);
+  }
 
-//   return authData;
-// };
+  return authData;
+};
 
 const AuthService = {
   auth,
   login,
   checkEmail,
-  // updateProfile,
+  updateProfile,
 };
 
 export default AuthService;
