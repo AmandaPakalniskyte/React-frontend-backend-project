@@ -1,6 +1,7 @@
 const { createNotFoundError, sendErrorResponse } = require('../helpers/errors');
 const { hashPassword, comparePasswords } = require('../helpers/password-encryption');
 const { createToken } = require('../helpers/token');
+const { removePublicAsset } = require('../helpers/public-asset-helpers');
 const UserModel = require('../models/user-model');
 const createUserViewModel = require('../view-models/create-user-view-model');
 
@@ -67,6 +68,8 @@ const checkEmail = async (req, res) => {
     res.status(200).json({ email, emailAvailable: foundUser === null });
   } catch (err) { sendErrorResponse(err, res); }
 };
+
+console.log(__dirname);
 
 const updateProfile = async (req, res) => {
   const requestData = {
