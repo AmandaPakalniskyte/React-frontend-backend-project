@@ -68,8 +68,38 @@ const checkEmail = async (req, res) => {
   } catch (err) { sendErrorResponse(err, res); }
 };
 
+const updateProfile = async (req, res) => {
+  const requestData = {
+    img: req.file?.filename,
+    firstName: req.body.firstName,
+    surname: req.body.surname,
+    email: req.body.email,
+  };
+  try {
+    await UserModel.validateUpdateData(requestData);
+
+    if (requestData.img) {
+      if (req.authUser.img) {
+        removePublicAsset(req.authUser.img);
+      }
+      req.authUser.img = requestData.img;
+    }
+
+    if (requestData.firstName) req.authUser.firstName = requestData.firstName;
+    if (requestData.surname) req.authUser.surname = requestData.surname;
+    if (requestData.email) req.authUser.email = requestData.email;
+
+    await req.authUser.save();
+
+    res.status(200).json({
+      user: createUserViewModel(req.authUser),
+      token: createToken({ email: req.authUser.email, role: req.authUser.role }),
+    });
+  } catch (err) { sendErrorResponse(err, res); }
+};
 
 module.exports = {
+  updateProfile,
   login,
   register,
   auth,
