@@ -1,4 +1,4 @@
-const { createNotFoundError, sendErrorResponse } = require('../helpers/errors');
+const { createNotFoundError, sendErrorResponse, createBadDataError } = require('../helpers/errors');
 const { hashPassword, comparePasswords } = require('../helpers/password-encryption');
 const { createToken } = require('../helpers/token');
 const { removePublicAsset } = require('../helpers/public-asset-helpers');
@@ -7,47 +7,48 @@ const createUserViewModel = require('../view-models/create-user-view-model');
 
 const login = async (req, res) => {
   const { email, password } = req.body;
-  const credentialExists = Boolean(email && password);
+  const crudentialExists = Boolean(email && password);
 
   try {
-    if (!credentialExists) throw new Error('Missing credentials');
+    if (!crudentialExists) throw new Error('Missing crudentials');
     const userDoc = await UserModel.findOne({ email });
 
     if (userDoc === null) throw createNotFoundError(`User with email '${email}' was not found.`);
 
     const passwordIsCorrect = await comparePasswords(password, userDoc.password);
 
-    if (!passwordIsCorrect) throw new Error(`Password is incorrect`);
+    if (!passwordIsCorrect) throw new Error('Password is incorrect');
 
     res.status(200).json({
       user: createUserViewModel(userDoc),
-      token: createToken({ email: userDoc.email, role: userDoc.role })
+      token: createToken({ email: userDoc.email, role: userDoc.role }),
     });
   } catch (err) {
     sendErrorResponse(err, res);
   }
-}
+};
 
 const register = async (req, res) => {
   const requestData = req.body;
 
   try {
     await UserModel.validateData(requestData);
-    const { email, password, img, firstName, surname } = requestData;
+    const {
+      email, password, img, firstName, surname,
+    } = requestData;
 
     const userDoc = await UserModel.create({
       email,
       password: await hashPassword(password),
       img,
       firstName,
-      surname
+      surname,
     });
 
     res.status(201).json({
       user: createUserViewModel(userDoc),
-      token: createToken({ email: userDoc.email, role: userDoc.role })
-    })
-
+      token: createToken({ email: userDoc.email, role: userDoc.role }),
+    });
   } catch (err) { sendErrorResponse(err, res); }
 };
 
@@ -68,8 +69,6 @@ const checkEmail = async (req, res) => {
     res.status(200).json({ email, emailAvailable: foundUser === null });
   } catch (err) { sendErrorResponse(err, res); }
 };
-
-console.log(__dirname);
 
 const updateProfile = async (req, res) => {
   const requestData = {

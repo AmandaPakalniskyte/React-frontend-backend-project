@@ -111,6 +111,8 @@ const update = async (req, res) => {
       email,
       password,
       role,
+      firstName,
+      surname,
       cartItems,
       favoredCups,
       img,
@@ -122,6 +124,8 @@ const update = async (req, res) => {
         email,
         password: password && await hashPassword(password),
         role,
+        firstName,
+        surname,
         cartItems,
         favoredCups,
         img

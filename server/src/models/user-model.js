@@ -98,12 +98,12 @@ const userValidationSchema = yup.object({
     .oneOf([yup.ref('password')], 'User.passwordConfirmation does not match User.password'),
 
   firstName: yup
-    .string().typeError('User.email must be a string')
-    .required('User.email is required'),
+    .string().typeError('User.firstName must be a string')
+    .required('User.firstName is required'),
   
   surname: yup
-    .string().typeError('User.email must be a string')
-    .required('User.email is required'),
+    .string().typeError('User.surname must be a string')
+    .required('User.surname is required'),
 
   role: yup.string().typeError('User.role must be a string')
     .oneOf(['USER', 'ADMIN']),
@@ -140,12 +140,10 @@ const userUpdateValidationSchema = yup.object({
   passwordConfirmation: yup.string().typeError('User.passwordConfirmation must be a string'),
 
   firstName: yup
-    .string().typeError('User.email must be a string')
-    .required('User.email is required'),
+    .string().typeError('User.firstName must be a string'),
   
   surname: yup
-    .string().typeError('User.email must be a string')
-    .required('User.email is required'),
+    .string().typeError('User.surname must be a string'),
 
   role: yup.string().typeError('User.role must be a string')
     .oneOf(['USER', 'ADMIN']),
