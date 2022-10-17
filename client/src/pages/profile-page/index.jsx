@@ -1,13 +1,13 @@
 import {
   Box,
   TextField,
-  Paper,
   Container,
   Typography,
   Button,
+  Grid,
 } from '@mui/material';
 import React from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useSearchParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
@@ -18,6 +18,8 @@ import { Image } from '../../components';
 import useAuth from '../../hooks/useAuth';
 import BackgroundContainer from '../../components/background-container';
 import BackgroundBox from '../../components/background-box';
+import PaintingsDisplaySection from './paintings-display-section';
+import PaintingService from '../../services/painting-service';
 
 const convertFileToUrl = (file) => new Promise((resolve, reject) => {
   const reader = new FileReader();
@@ -49,6 +51,21 @@ const validationSchema = yup.object({
 });
 
 const ProfilePage = () => {
+  const [paintings, setPaintings] = React.useState([]);
+  const [searchParams] = useSearchParams();
+
+  const handleFetchPaintings = React.useCallback(async () => {
+    const [fetchedPaintings] = await Promise.all([
+      PaintingService.fetchAll(searchParams.toString()),
+    ]);
+    setPaintings(fetchedPaintings);
+  }, [searchParams]);
+
+  const handleUpdatePainting = async (props) => {
+    await PaintingService.update(props);
+    await handleFetchPaintings();
+  };
+
   const { user, dispatch } = useAuth();
   const [imgString, setImgString] = React.useState(null);
   const [imgFile, setImgFile] = React.useState(null);
@@ -101,106 +118,147 @@ const ProfilePage = () => {
     <>
       <BackgroundContainer>
         <BackgroundBox>
+          <Box display="flex" gap={5}>
+            <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" gap={5}>
+              <Box sx={{ position: 'relative', width: 150, height: 150 }}>
+                <Image
+                  sx={{ borderRadius: 1 }}
+                  src={imgString ?? user.img ?? '/mister.jpg'}
+                />
+                <Box sx={{
+                  width: 150,
+                  display: 'flex',
+                  justifyContent: 'center',
+                }}
+                >
+                  {imgFile ? (
+                    <Button
+                      fullWidth
+                      size="large"
+                      variant="contained"
+                      color="error"
+                      onClick={cancelImgUpload}
+                    >
+                      <CancelIcon />
+                    </Button>
+                  ) : (
+                    <Button variant="contained" fullWidth size="large" onClick={() => imgUploadRef.current.click()}>
+                      <CameraAltIcon />
+                    </Button>
+                  )}
+                </Box>
+                <input
+                  type="file"
+                  accept="image/png, image/jpeg"
+                  hidden
+                  ref={imgUploadRef}
+                  onChange={handleImgUpload}
+                />
+              </Box>
+              <Box
+                component="form"
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 3,
+                  width: 300,
+                  p: 3,
+                  mx: 'auto',
+                }}
+                onSubmit={handleSubmit}
+              >
 
-          <Box sx={{ position: 'relative', height: 240, width: 240 }}>
-            <Image
-              sx={{ borderRadius: '50%' }}
-              src={imgString ?? user.img ?? '/mister.jpg'}
-            />
-            <Box sx={{
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              right: 0,
-              display: 'flex',
-              justifyContent: 'center',
-              transform: 'translate(0, 50%)',
-            }}
-            >
-              {imgFile ? (
+                <Typography
+                  variant="h5"
+                  sx={{ textAlign: 'center', mb: 2 }}
+                >
+                  Profilio informacija
+                </Typography>
+                <TextField
+                  fullWidth
+                  name="firstName"
+                  label="Vardas"
+                  variant="standard"
+                  value={values.firstName}
+                  onChange={handleChange}
+                  error={Boolean(errors.firstName)}
+                  helperText={errors.firstName}
+                />
+                <TextField
+                  fullWidth
+                  name="surname"
+                  label="Pavardė"
+                  variant="standard"
+                  value={values.surname}
+                  onChange={handleChange}
+                  error={Boolean(errors.surname)}
+                  helperText={errors.surname}
+                />
+                <TextField
+                  fullWidth
+                  name="email"
+                  label="El. paštas"
+                  variant="standard"
+                  value={values.email}
+                  onChange={handleChange}
+                  error={Boolean(errors.email)}
+                  helperText={errors.email}
+                />
                 <Button
                   variant="contained"
-                  color="error"
-                  onClick={cancelImgUpload}
+                  type="submit"
+                  fullWidth
+                  size="large"
+                  disabled={(!isValid || !dirty) && imgString === null}
                 >
-                  <CancelIcon />
+                  Atnaujinti
                 </Button>
-              ) : (
-                <Button variant="contained" onClick={() => imgUploadRef.current.click()}>
-                  <CameraAltIcon />
-                </Button>
-              )}
+
+              </Box>
             </Box>
-            <input
-              type="file"
-              accept="image/png, image/jpeg"
-              hidden
-              ref={imgUploadRef}
-              onChange={handleImgUpload}
-            />
+            <Box width="300px">
+              <Grid container height="545px" gap={10}>
+                <Grid item xs={12} border="2px solid black" borderRadius={1} textAlign="center">
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    fullWidth
+                    size="large"
+                    onClick={() => { handleFetchPaintings(); }}
+                  >
+                    Rodyti visas prekes
+                  </Button>
+
+                </Grid>
+                <Grid item xs={12} border="2px solid black" borderRadius={1}>
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    fullWidth
+                    size="large"
+                  >
+                    Kurti naujas prekes
+                  </Button>
+
+                </Grid>
+                <Grid item xs={12} border="2px solid black" borderRadius={1}>
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    fullWidth
+                    size="large"
+                  >
+                    Rodyti visus klientus
+                  </Button>
+
+                </Grid>
+              </Grid>
+            </Box>
           </Box>
-          <Paper
-            component="form"
-            elevation={3}
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 3,
-              width: 400,
-              p: 3,
-              mx: 'auto',
-              my: 4,
-            }}
-            onSubmit={handleSubmit}
-          >
-
-            <Typography
-              variant="h5"
-              sx={{ textAlign: 'center', mb: 2 }}
-            >
-              Profilio informacija
-            </Typography>
-            <TextField
-              fullWidth
-              name="firstName"
-              label="Vardas"
-              variant="standard"
-              value={values.firstName}
-              onChange={handleChange}
-              error={Boolean(errors.firstName)}
-              helperText={errors.firstName}
-            />
-            <TextField
-              fullWidth
-              name="surname"
-              label="Pavardė"
-              variant="standard"
-              value={values.surname}
-              onChange={handleChange}
-              error={Boolean(errors.surname)}
-              helperText={errors.surname}
-            />
-            <TextField
-              fullWidth
-              name="email"
-              label="Email"
-              variant="standard"
-              value={values.email}
-              onChange={handleChange}
-              error={Boolean(errors.email)}
-              helperText={errors.email}
-            />
-            <Button
-              variant="contained"
-              type="submit"
-              fullWidth
-              size="large"
-              disabled={(!isValid || !dirty) && imgString === null}
-            >
-              Atnaujinti
-            </Button>
-
-          </Paper>
+          <PaintingsDisplaySection
+            paintings={paintings}
+            handleUpdatePainting={handleUpdatePainting}
+          />
         </BackgroundBox>
       </BackgroundContainer>
       <Container sx={{ mt: 4 }} />

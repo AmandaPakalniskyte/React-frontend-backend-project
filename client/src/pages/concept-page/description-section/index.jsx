@@ -12,7 +12,7 @@ const items = [
 ];
 
 const DescriptionSection = () => (
-  <BackgroundBox>
+  <BackgroundBox flexDirection="column">
     <Typography
       component="h2"
       textAlign="center"

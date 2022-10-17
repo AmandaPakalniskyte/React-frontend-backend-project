@@ -54,7 +54,6 @@ const GalleryPage = () => {
               size={size}
               updatePainting={handleUpdatePainting}
             />
-            {title}
           </Grid>
         ))}
       </Grid>
