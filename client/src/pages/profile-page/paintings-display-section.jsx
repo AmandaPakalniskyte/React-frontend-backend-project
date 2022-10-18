@@ -11,14 +11,16 @@ const PaintingsDisplaySection = ({ paintings, handleUpdatePainting }) => (
       {paintings.map(({
         id,
         title,
+        author,
         description,
         img,
         price,
       }) => (
-        <Grid key={id} item xs={12} sm={6} md={4} xl={3}>
+        <Grid key={id} item xs={12} sm={12} md={12} xl={4}>
           <PaintingsDisplayCard
             id={id}
             title={title}
+            author={author}
             description={description}
             img={img}
             price={price}

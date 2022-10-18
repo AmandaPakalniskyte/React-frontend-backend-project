@@ -10,10 +10,12 @@ import { Image, TypographyLimited } from '../../components';
 
 const PaintingsDisplayCard = ({
   title,
+  author,
   img,
   description,
   price,
   size,
+  category,
 }) => (
   <Card sx={{
     display: 'flex', flexDirection: 'column', height: '100%', p: 1,
@@ -25,23 +27,41 @@ const PaintingsDisplayCard = ({
     <CardContent sx={{ p: 2, flexGrow: 1 }}>
       <Box sx={{
         display: 'flex',
-        alignItems: 'center',
+        flexDirection: 'column',
         mb: 2,
       }}
       >
-        <Typography variant="h5" component="div" sx={{ mr: 2 }}>
-          {title}
+        <Typography>
+          Pavadinimas:
           {' '}
+          {title}
+        </Typography>
+        <Typography>
+          Autorius:
+          {' '}
+          {author}
+        </Typography>
+        <Typography>
+          Dydis:
           {size}
+        </Typography>
+        <Typography>
+          Kategorija:
+          {' '}
+          {category}
+        </Typography>
+        <Typography>
+          Kaina:
+          {' '}
+          {price}
+          {' '}
+          EUR
         </Typography>
 
       </Box>
-      <TypographyLimited variant="body2" color="text.secondary">{description}</TypographyLimited>
-      <Typography variant="h5" component="div" sx={{ mt: 2 }}>
-        {price}
-        {' '}
-        EUR
-      </Typography>
+      <TypographyLimited variant="body2" color="text.secondary">
+        {description}
+      </TypographyLimited>
     </CardContent>
     <CardActions sx={{ pb: 2, alignSelf: 'center' }}>
 

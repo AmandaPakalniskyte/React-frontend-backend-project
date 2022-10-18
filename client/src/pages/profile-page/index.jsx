@@ -4,7 +4,6 @@ import {
   Container,
   Typography,
   Button,
-  Grid,
 } from '@mui/material';
 import React from 'react';
 import { Navigate, useSearchParams } from 'react-router-dom';
@@ -20,6 +19,7 @@ import BackgroundContainer from '../../components/background-container';
 import BackgroundBox from '../../components/background-box';
 import PaintingsDisplaySection from './paintings-display-section';
 import PaintingService from '../../services/painting-service';
+import CreateNewPaintingCard from './create-new-painting-card';
 
 const convertFileToUrl = (file) => new Promise((resolve, reject) => {
   const reader = new FileReader();
@@ -118,8 +118,19 @@ const ProfilePage = () => {
     <>
       <BackgroundContainer>
         <BackgroundBox>
-          <Box display="flex" gap={5}>
-            <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" gap={5}>
+          <Box height="720px" width="100%" display="flex" justifyContent="space-around">
+            <Box
+              display="flex"
+              flexDirection="column"
+              justifyContent="center"
+              alignItems="center"
+              gap={5}
+              boxShadow={5}
+              height="100%"
+              width="400px"
+              borderRadius={1}
+              p={5}
+            >
               <Box sx={{ position: 'relative', width: 150, height: 150 }}>
                 <Image
                   sx={{ borderRadius: 1 }}
@@ -161,8 +172,8 @@ const ProfilePage = () => {
                   display: 'flex',
                   flexDirection: 'column',
                   gap: 3,
-                  width: 300,
-                  p: 3,
+                  width: '100%',
+                  pt: 3,
                   mx: 'auto',
                 }}
                 onSubmit={handleSubmit}
@@ -216,44 +227,28 @@ const ProfilePage = () => {
 
               </Box>
             </Box>
-            <Box width="300px">
-              <Grid container height="545px" gap={10}>
-                <Grid item xs={12} border="2px solid black" borderRadius={1} textAlign="center">
-                  <Button
-                    variant="contained"
-                    type="submit"
-                    fullWidth
-                    size="large"
-                    onClick={() => { handleFetchPaintings(); }}
-                  >
-                    Rodyti visas prekes
-                  </Button>
+            <CreateNewPaintingCard />
 
-                </Grid>
-                <Grid item xs={12} border="2px solid black" borderRadius={1}>
-                  <Button
-                    variant="contained"
-                    type="submit"
-                    fullWidth
-                    size="large"
-                  >
-                    Kurti naujas prekes
-                  </Button>
-
-                </Grid>
-                <Grid item xs={12} border="2px solid black" borderRadius={1}>
-                  <Button
-                    variant="contained"
-                    type="submit"
-                    fullWidth
-                    size="large"
-                  >
-                    Rodyti visus klientus
-                  </Button>
-
-                </Grid>
-              </Grid>
-            </Box>
+          </Box>
+          <Box display="flex" flexDirection="column" gap={3} width="300px" my={5} alignSelf="center">
+            <Button
+              variant="contained"
+              type="submit"
+              fullWidth
+              size="large"
+              onClick={() => { handleFetchPaintings(); }}
+            >
+              Rodyti visas prekes
+            </Button>
+            <Button
+              variant="contained"
+              type="submit"
+              fullWidth
+              size="large"
+              onClick={() => { handleFetchPaintings(); }}
+            >
+              Rodyti visus klientus
+            </Button>
           </Box>
           <PaintingsDisplaySection
             paintings={paintings}

@@ -11,12 +11,17 @@ import 'react-slideshow-image/dist/styles.css';
 const InfoPage = () => {
   const { id } = useParams();
   const [painting, setPainting] = React.useState(null);
+  const [loading, setLoading] = React.useState(false);
 
   const fetchPainting = React.useCallback(async () => {
-    const response = await fetch(`http://localhost:8000/api/paintings/${id}`);
-    const fetchedPainting = await response.json();
-
-    setPainting(fetchedPainting);
+    setLoading(true);
+    try {
+      const resp = await fetch(`http://localhost:8000/api/paintings/${id}`);
+      const answer = await resp.json();
+      console.log(answer);
+      setPainting(answer);
+      setLoading(false);
+    } catch (error) { console.error(error); }
   }, [id]);
   React.useEffect(() => {
     fetchPainting();
@@ -26,7 +31,7 @@ const InfoPage = () => {
     <BackgroundContainer>
       <BackgroundBox>
         <Slide>
-          {painting && painting.imgWall.map((img) => (
+          {loading ? 'loading' : painting && painting?.imgWall.map((img) => (
             <Box key={img}>
               <Image
                 src={img}
@@ -71,7 +76,10 @@ const InfoPage = () => {
         >
           {painting?.description}
         </Typography>
-        <BackToGalleryButton />
+        <Box width="100%">
+          <BackToGalleryButton />
+        </Box>
+
       </BackgroundBox>
     </BackgroundContainer>
   );
