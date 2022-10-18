@@ -19,8 +19,8 @@ const StyledButton = styled(Button)(() => ({
 }));
 
 const navigationButtons = [
-  { buttonTitle: 'Pirkti prisijungus', link: '/login' },
-  { buttonTitle: 'Registruotis ir pirkti', link: '/register' },
+  { buttonTitle: 'Pirkti prisijungus', link: '/auth/login' },
+  { buttonTitle: 'Registruotis ir pirkti', link: '/auth/register' },
   { buttonTitle: 'Pirkti kaip svečiui', link: '/contact' },
 ];
 
