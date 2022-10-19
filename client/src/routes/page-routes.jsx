@@ -12,6 +12,7 @@ import LoginPage from '../pages/login-page';
 import RegisterPage from '../pages/register-page';
 import ErrorPage from '../pages/error-page';
 import ProfilePage from '../pages/profile-page';
+import UserProfilePage from '../pages/user-profile-page';
 import RequireVisitor from './require-visitor';
 import RequireAuth from './require-auth';
 
@@ -25,7 +26,8 @@ const PageRoutes = () => (
       <Route path="/order" element={<OrderPage />} />
       <Route path="/contact" element={<GuestRegisterPage />} />
       <Route path="/info/:id" element={<InfoPage />} />
-      <Route path="profile" element={<RequireAuth><ProfilePage /></RequireAuth>} />
+      <Route path="/profile" element={<RequireAuth><ProfilePage /></RequireAuth>} />
+      <Route path="/user-profile" element={<RequireAuth><UserProfilePage /></RequireAuth>} />
 
       <Route path="auth/" element={<RequireVisitor><MainLayout /></RequireVisitor>}>
         <Route path="register" element={<RequireVisitor><RegisterPage /></RequireVisitor>} />

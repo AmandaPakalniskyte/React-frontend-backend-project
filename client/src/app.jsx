@@ -50,7 +50,7 @@ const App = () => {
     <LocalizationProvider dateAdapter={AdapterMoment}>
       {!animationEnded && (
       <LoadingBackground className={initialized && 'loaded'}>
-        Labai graži animacija
+        Kraunasi
       </LoadingBackground>
       )}
       {initialized && (

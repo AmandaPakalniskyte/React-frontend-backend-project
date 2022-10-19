@@ -23,6 +23,7 @@ const authReducer = (currentState, action) => {
 
     case AUTH_SUCCESS: {
       localStorage.setItem('token', action.payload.token);
+      localStorage.setItem('role', action.payload.user.role);
 
       newState.loggedIn = true;
       newState.user = action.payload.user;

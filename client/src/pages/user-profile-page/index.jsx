@@ -50,7 +50,7 @@ const validationSchema = yup.object({
     .required('Privaloma'),
 });
 
-const ProfilePage = () => {
+const UserProfilePage = () => {
   const [paintings, setPaintings] = React.useState([]);
   const [searchParams] = useSearchParams();
 
@@ -115,8 +115,8 @@ const ProfilePage = () => {
   if (user === null) return <Navigate to="/auth/login?redirect=/profile" />;
 
   const userRole = localStorage.getItem('role');
-  if (userRole === 'USER') {
-    return <Navigate to="/user-profile" />;
+  if (userRole === 'ADMIN') {
+    return <Navigate to="/profile" />;
   }
 
   return (
@@ -306,4 +306,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default UserProfilePage;

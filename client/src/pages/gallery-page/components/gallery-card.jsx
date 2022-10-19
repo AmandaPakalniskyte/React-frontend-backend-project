@@ -37,7 +37,6 @@ const GalleryCard = ({
   description,
   price,
   liked,
-  size,
   updatePainting,
 }) => {
   const navigate = useNavigate();
@@ -70,8 +69,7 @@ const GalleryCard = ({
           pt: '45%',
         }}
         >
-          {size.label}
-          Neveikia
+          {title}
         </Item>
         <Image src={img} sx={{ position: 'absolute', top: 0, left: 0 }} />
       </Box>
