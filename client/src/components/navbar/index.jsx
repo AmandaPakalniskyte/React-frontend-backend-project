@@ -50,6 +50,8 @@ const Navbar = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isContracted]);
 
+  const userRole = localStorage.getItem('role');
+
   return (
     <AppBar elevation={0} position="fixed">
       <Box
@@ -218,7 +220,7 @@ const Navbar = () => {
                 <MenuItem
                   sx={{ display: 'flex', justifyContent: 'space-between' }}
                   onClick={() => {
-                    navigate('/profile');
+                    navigate(userRole === 'USER' ? '/user-profile' : '/profile');
                     setAuthMenuOpen(false);
                   }}
                 >

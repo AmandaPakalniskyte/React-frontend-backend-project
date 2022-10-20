@@ -6,7 +6,7 @@ import {
   Button,
 } from '@mui/material';
 import React from 'react';
-import { Navigate, useSearchParams } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
@@ -17,9 +17,6 @@ import { Image } from '../../components';
 import useAuth from '../../hooks/useAuth';
 import BackgroundContainer from '../../components/background-container';
 import BackgroundBox from '../../components/background-box';
-import PaintingsDisplaySection from './paintings-display-section';
-import PaintingService from '../../services/painting-service';
-import CreateNewPaintingCard from './create-new-painting-card';
 
 const convertFileToUrl = (file) => new Promise((resolve, reject) => {
   const reader = new FileReader();
@@ -51,21 +48,6 @@ const validationSchema = yup.object({
 });
 
 const UserProfilePage = () => {
-  const [paintings, setPaintings] = React.useState([]);
-  const [searchParams] = useSearchParams();
-
-  const handleFetchPaintings = React.useCallback(async () => {
-    const [fetchedPaintings] = await Promise.all([
-      PaintingService.fetchAll(searchParams.toString()),
-    ]);
-    setPaintings(fetchedPaintings);
-  }, [searchParams]);
-
-  const handleUpdatePainting = async (props) => {
-    await PaintingService.update(props);
-    await handleFetchPaintings();
-  };
-
   const { user, dispatch } = useAuth();
   const [imgString, setImgString] = React.useState(null);
   const [imgFile, setImgFile] = React.useState(null);
@@ -112,7 +94,7 @@ const UserProfilePage = () => {
     cancelImgUpload();
   }, [user]);
 
-  if (user === null) return <Navigate to="/auth/login?redirect=/profile" />;
+  if (user === null) return <Navigate to="/auth/login?redirect=/user-profile" />;
 
   const userRole = localStorage.getItem('role');
   if (userRole === 'ADMIN') {
@@ -272,33 +254,8 @@ const UserProfilePage = () => {
 
               </Box>
             </Box>
-            <CreateNewPaintingCard />
 
           </Box>
-          <Box display="flex" flexDirection="column" gap={3} width="300px" my={5} alignSelf="center">
-            <Button
-              variant="contained"
-              type="submit"
-              fullWidth
-              size="large"
-              onClick={() => { handleFetchPaintings(); }}
-            >
-              Rodyti visas prekes
-            </Button>
-            <Button
-              variant="contained"
-              type="submit"
-              fullWidth
-              size="large"
-              onClick={() => { handleFetchPaintings(); }}
-            >
-              Rodyti visus klientus
-            </Button>
-          </Box>
-          <PaintingsDisplaySection
-            paintings={paintings}
-            handleUpdatePainting={handleUpdatePainting}
-          />
         </BackgroundBox>
       </BackgroundContainer>
       <Container sx={{ mt: 4 }} />
