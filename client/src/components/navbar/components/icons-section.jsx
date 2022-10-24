@@ -30,25 +30,27 @@ const IconSection = () => {
 
   return (
     <Box>
-      <IconButton
-        size="large"
-        edge="end"
-        color="inherit"
-        onClick={() => navigate('/favourites')}
-      >
-        <FavoriteBorderIcon />
-      </IconButton>
       {!isAdmin && (
-      <IconButton
-        size="large"
-        edge="end"
-        color="inherit"
-        onClick={() => navigate('/order')}
-      >
-        <Badge badgeContent={cartItemsCount} color="secondary">
-          <ShoppingBasketIcon />
-        </Badge>
-      </IconButton>
+        <>
+          <IconButton
+            size="large"
+            edge="end"
+            color="inherit"
+            onClick={() => navigate('/favourites')}
+          >
+            <FavoriteBorderIcon />
+          </IconButton>
+          <IconButton
+            size="large"
+            edge="end"
+            color="inherit"
+            onClick={() => navigate('/order')}
+          >
+            <Badge badgeContent={cartItemsCount} color="secondary">
+              <ShoppingBasketIcon />
+            </Badge>
+          </IconButton>
+        </>
       )}
       {loggedIn && (
         <>

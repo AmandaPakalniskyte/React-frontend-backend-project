@@ -26,6 +26,20 @@ const fetchByIdArr = async (idArr) => {
   return items;
 };
 
+const create = async (houseProps) => {
+  const response = await fetch(`${domain}/${collectionName}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(houseProps),
+  });
+
+  const house = await response.json();
+
+  return house;
+};
+
 const update = async ({ id, ...updateProps }) => {
   const response = await fetch(`${domain}/${collectionName}/${id}`, {
     method: 'PATCH',
@@ -49,6 +63,7 @@ const getPriceRange = async () => {
 
 const PaintingService = {
   fetchAll,
+  create,
   update,
   fetchById,
   fetchByIdArr,
