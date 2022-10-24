@@ -26,18 +26,18 @@ const fetchByIdArr = async (idArr) => {
   return items;
 };
 
-const create = async (houseProps) => {
+const create = async (paintingProps) => {
   const response = await fetch(`${domain}/${collectionName}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(houseProps),
+    body: JSON.stringify(paintingProps),
   });
 
-  const house = await response.json();
+  const responseData = await response.json();
 
-  return house;
+  return responseData;
 };
 
 const update = async ({ id, ...updateProps }) => {
