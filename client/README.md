@@ -5,12 +5,9 @@
 npm i
 ```
 
-## launch server
-```
-npm run server
-```
-
 ## launch client 
 ```
 npm run start
+```
+## specify server address in .env file 
 ```

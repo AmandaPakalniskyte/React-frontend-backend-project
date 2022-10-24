@@ -1,7 +1,7 @@
-const domain = 'http://localhost:8000';
+const domain = process.env.REACT_APP_SERVER_ADDRESS;
 const collectionName = 'api/paintings';
-// const relationsParams = 'joinBy=categoryId';
-const relationsParams = 'joinBy=categoryId&_joinBySizeId=sizeId';
+const relationsParams = 'joinBy=categoryId';
+// const relationsParams = 'joinBy=categoryId&_joinBySizeId=sizeId';
 
 const fetchAll = async (paramsString = null) => {
   const urlParamsString = paramsString ? `&${paramsString}` : '';

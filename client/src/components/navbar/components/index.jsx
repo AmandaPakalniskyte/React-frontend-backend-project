@@ -31,9 +31,6 @@ export const Link = styled(NavLink, {
         color: primary.main,
       },
 
-      // '&:not(:last-of-type)': {
-      //   borderBottom: `1px solid ${grey[400]}`,
-      // },
     }
     : {
       ...commonStyles,

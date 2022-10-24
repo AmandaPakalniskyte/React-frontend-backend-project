@@ -22,14 +22,6 @@ const CreateNewPaintingCard = ({
     });
   };
 
-  // React.useEffect(() => {
-  //   setTitle('');
-  // }, []);
-
-  // const clearFields = () => {
-  //   setDescription('');
-  // };
-
   const clearFields = () => {
     setTitle('');
     setPrice('');
@@ -44,7 +36,6 @@ const CreateNewPaintingCard = ({
       display="flex"
       flexDirection="column"
       alignItems="center"
-      // border="solid 1px black"
       height="100%"
       width="320px"
       borderRadius={1}

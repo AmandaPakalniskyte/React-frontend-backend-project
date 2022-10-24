@@ -4,8 +4,10 @@ import FavouritesContext from '../../contexts/favourites-context';
 import FavouriteCard from './favourite-card';
 import BackToGalleryButton from '../../components/back-to-galerry-button';
 
+const domain = process.env.REACT_APP_SERVER_ADDRESS;
+
 const fetchItem = async (id) => {
-  const response = await fetch(`http://localhost:8000/paintings/${id}?_expand=category&_expand=size&_expand=color`);
+  const response = await fetch(`${domain}/paintings/${id}?_expand=category&_expand=size&_expand=color`);
   const item = await response.json();
   console.log(item);
 

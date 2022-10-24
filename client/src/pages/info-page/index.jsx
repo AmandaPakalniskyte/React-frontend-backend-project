@@ -8,6 +8,8 @@ import BackgroundBox from '../../components/background-box';
 import BackgroundContainer from '../../components/background-container';
 import 'react-slideshow-image/dist/styles.css';
 
+const domain = process.env.REACT_APP_SERVER_ADDRESS;
+
 const InfoPage = () => {
   const { id } = useParams();
   const [painting, setPainting] = React.useState(null);
@@ -16,7 +18,7 @@ const InfoPage = () => {
   const fetchPainting = React.useCallback(async () => {
     setLoading(true);
     try {
-      const resp = await fetch(`http://localhost:8000/api/paintings/${id}`);
+      const resp = await fetch(`${domain}/api/paintings/${id}`);
       const answer = await resp.json();
       console.log(answer);
       setPainting(answer);

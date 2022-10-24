@@ -1,4 +1,4 @@
-const domain = 'http://localhost:8000';
+const domain = process.env.REACT_APP_SERVER_ADDRESS;
 
 const fetchAll = async () => {
   const response = await fetch(`${domain}/api/sizes`);

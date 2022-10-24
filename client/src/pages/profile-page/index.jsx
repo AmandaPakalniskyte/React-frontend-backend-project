@@ -20,6 +20,7 @@ import BackgroundBox from '../../components/background-box';
 import PaintingsDisplaySection from './paintings-display-section';
 import PaintingService from '../../services/painting-service';
 import CreateNewPaintingCard from './create-new-painting-card';
+import ProfileInfoAndCreateProductSection from './profile-info-create-product-section';
 
 const convertFileToUrl = (file) => new Promise((resolve, reject) => {
   const reader = new FileReader();
@@ -123,41 +124,7 @@ const ProfilePage = () => {
     <>
       <BackgroundContainer>
         <BackgroundBox>
-          <Box
-            height="100%"
-            width="100%"
-            display="flex"
-            sx={() => ({
-              flexDirection: {
-                xl: 'row',
-                lg: 'column',
-                md: 'column',
-                sm: 'column',
-                xs: 'column',
-              },
-              justifyContent: {
-                xl: 'space-around',
-                lg: 'center',
-                md: 'center',
-                sm: 'center',
-                xs: 'center',
-              },
-              alignItems: {
-                xl: 'stretch',
-                lg: 'center',
-                md: 'center',
-                sm: 'center',
-                xs: 'center',
-              },
-              gap: {
-                xl: 0,
-                lg: 5,
-                md: 5,
-                sm: 5,
-                xs: 5,
-              },
-            })}
-          >
+          <ProfileInfoAndCreateProductSection>
             <Box
               display="flex"
               flexDirection="column"
@@ -179,7 +146,7 @@ const ProfilePage = () => {
               <Box sx={{ position: 'relative', width: 150, height: 150 }}>
                 <Image
                   sx={{ borderRadius: 1 }}
-                  src={imgString ?? user.img ?? '/mister.jpg'}
+                  src={imgString ?? user.img ?? '/palms.jpg'}
                 />
                 <Box sx={{
                   width: 150,
@@ -273,8 +240,7 @@ const ProfilePage = () => {
               </Box>
             </Box>
             <CreateNewPaintingCard />
-
-          </Box>
+          </ProfileInfoAndCreateProductSection>
           <Box display="flex" flexDirection="column" gap={3} width="300px" my={5} alignSelf="center">
             <Button
               variant="contained"
@@ -284,15 +250,6 @@ const ProfilePage = () => {
               onClick={() => { handleFetchPaintings(); }}
             >
               Rodyti visas prekes
-            </Button>
-            <Button
-              variant="contained"
-              type="submit"
-              fullWidth
-              size="large"
-              onClick={() => { handleFetchPaintings(); }}
-            >
-              Rodyti visus klientus
             </Button>
           </Box>
           <PaintingsDisplaySection

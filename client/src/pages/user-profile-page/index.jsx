@@ -17,6 +17,7 @@ import { Image } from '../../components';
 import useAuth from '../../hooks/useAuth';
 import BackgroundContainer from '../../components/background-container';
 import BackgroundBox from '../../components/background-box';
+import UserInfoSection from './user-info-section';
 
 const convertFileToUrl = (file) => new Promise((resolve, reject) => {
   const reader = new FileReader();
@@ -105,41 +106,7 @@ const UserProfilePage = () => {
     <>
       <BackgroundContainer>
         <BackgroundBox>
-          <Box
-            height="100%"
-            width="100%"
-            display="flex"
-            sx={() => ({
-              flexDirection: {
-                xl: 'row',
-                lg: 'column',
-                md: 'column',
-                sm: 'column',
-                xs: 'column',
-              },
-              justifyContent: {
-                xl: 'space-around',
-                lg: 'center',
-                md: 'center',
-                sm: 'center',
-                xs: 'center',
-              },
-              alignItems: {
-                xl: 'stretch',
-                lg: 'center',
-                md: 'center',
-                sm: 'center',
-                xs: 'center',
-              },
-              gap: {
-                xl: 0,
-                lg: 5,
-                md: 5,
-                sm: 5,
-                xs: 5,
-              },
-            })}
-          >
+          <UserInfoSection>
             <Box
               display="flex"
               flexDirection="column"
@@ -161,7 +128,7 @@ const UserProfilePage = () => {
               <Box sx={{ position: 'relative', width: 150, height: 150 }}>
                 <Image
                   sx={{ borderRadius: 1 }}
-                  src={imgString ?? user.img ?? '/mister.jpg'}
+                  src={imgString ?? user.img ?? '/eyes.jpg'}
                 />
                 <Box sx={{
                   width: 150,
@@ -255,7 +222,7 @@ const UserProfilePage = () => {
               </Box>
             </Box>
 
-          </Box>
+          </UserInfoSection>
         </BackgroundBox>
       </BackgroundContainer>
       <Container sx={{ mt: 4 }} />
