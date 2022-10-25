@@ -7,6 +7,7 @@ const CreateNewPaintingCard = ({
   onSubmit,
 }) => {
   const [title, setTitle] = React.useState('');
+  const [author, setAuthor] = React.useState('');
   const [price, setPrice] = React.useState('');
   const [img, setImg] = React.useState('');
   const [description, setDescription] = React.useState('');
@@ -16,14 +17,18 @@ const CreateNewPaintingCard = ({
 
     onSubmit({
       title,
+      author,
       price: Number(price),
       img,
       description,
+      sizeId: '6336dc406d9260f66411db59',
+      categoryId: '6336d629714b7d1d42c28a6e',
     });
   };
 
   const clearFields = () => {
     setTitle('');
+    setAuthor('');
     setPrice('');
     setDescription('');
     setImg('');
@@ -64,15 +69,15 @@ const CreateNewPaintingCard = ({
           variant="filled"
           width="100%"
           label="Autorius"
-          value={title}
-          onChange={(event) => setTitle(event.target.value)}
+          value={author}
+          onChange={(event) => setAuthor(event.target.value)}
         />
         <TextField
           variant="filled"
           width="100%"
-          label="Dydis"
-          value={title}
-          onChange={(event) => setTitle(event.target.value)}
+          label="Nuotrauka"
+          value={img}
+          onChange={(event) => setImg(event.target.value)}
         />
         <TextField
           variant="filled"
@@ -89,12 +94,6 @@ const CreateNewPaintingCard = ({
           value={description}
           onChange={(event) => setDescription(event.target.value)}
         />
-        <TextField
-          variant="filled"
-          label="Nuotrauka"
-          value={img}
-          onChange={(event) => setImg(event.target.value)}
-        />
       </Box>
       <Box my={3} width="100%" display="flex" justifyContent="space-between">
         <Button
@@ -108,6 +107,7 @@ const CreateNewPaintingCard = ({
           variant="contained"
           type="submit"
           sx={(theme) => ({ backgroundColor: theme.palette.main })}
+          onClick={handleSubmit}
         >
           Išsaugoti
         </Button>

@@ -46,6 +46,10 @@ const validationSchema = yup.object({
     .required('Privaloma'),
   surname: yup.string()
     .required('Privaloma'),
+  street: yup.string(),
+  houseNumber: yup.string(),
+  apartmwntNumber: yup.string(),
+  city: yup.string(),
 });
 
 const UserProfilePage = () => {
@@ -77,12 +81,22 @@ const UserProfilePage = () => {
       email: user.email,
       firstName: user.firstName,
       surname: user.surname,
+      street: user.street,
+      houseNumber: user.houseNumber,
+      apartmentNumber: user.apartmentNumber,
+      city: user.city,
     },
-    onSubmit: ({ email, firstName, surname }) => {
+    onSubmit: ({
+      email, firstName, surname, street, houseNumber, apartmentNumber, city,
+    }) => {
       const formData = new FormData();
       if (email !== user.email) formData.set('email', email);
       if (firstName !== user.firstName) formData.set('firstName', firstName);
       if (surname !== user.surname) formData.set('surname', surname);
+      if (street !== user.street) formData.set('street', street);
+      if (houseNumber !== user.houseNumber) formData.set('houseNumber', houseNumber);
+      if (apartmentNumber !== user.apartmentNumber) formData.set('apartmentNumber', apartmentNumber);
+      if (city !== user.city) formData.set('city', city);
       if (imgFile) formData.set('img', imgFile);
 
       dispatch(createAuthUpdateProfileThunkAction(formData));
@@ -208,6 +222,46 @@ const UserProfilePage = () => {
                   onChange={handleChange}
                   error={Boolean(errors.email)}
                   helperText={errors.email}
+                />
+                <TextField
+                  fullWidth
+                  name="street"
+                  label="Gatvė"
+                  variant="standard"
+                  value={values.street}
+                  onChange={handleChange}
+                  error={Boolean(errors.street)}
+                  helperText={errors.street}
+                />
+                <TextField
+                  fullWidth
+                  name="houseNumber"
+                  label="Namo numeris"
+                  variant="standard"
+                  value={values.houseNumber}
+                  onChange={handleChange}
+                  error={Boolean(errors.houseNumber)}
+                  helperText={errors.houseNumber}
+                />
+                <TextField
+                  fullWidth
+                  name="apartmentNumber"
+                  label="Buto numeris"
+                  variant="standard"
+                  value={values.apartmentNumber}
+                  onChange={handleChange}
+                  error={Boolean(errors.apartmentNumber)}
+                  helperText={errors.apartmentNumber}
+                />
+                <TextField
+                  fullWidth
+                  name="city"
+                  label="Miestas"
+                  variant="standard"
+                  value={values.city}
+                  onChange={handleChange}
+                  error={Boolean(errors.city)}
+                  helperText={errors.city}
                 />
                 <Button
                   variant="contained"

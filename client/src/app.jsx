@@ -4,7 +4,8 @@ import {
 } from 'react-router-dom';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import { styled, useTheme } from '@mui/material';
+import { styled, useTheme, Box } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 import { CartProvider } from './contexts/cart-context';
 import { FavouritesProvider } from './contexts/favourites-context';
 import PageRoutes from './routes/page-routes';
@@ -50,7 +51,9 @@ const App = () => {
     <LocalizationProvider dateAdapter={AdapterMoment}>
       {!animationEnded && (
       <LoadingBackground className={initialized && 'loaded'}>
-        Kraunasi
+        <Box sx={{ display: 'flex' }}>
+          <CircularProgress />
+        </Box>
       </LoadingBackground>
       )}
       {initialized && (

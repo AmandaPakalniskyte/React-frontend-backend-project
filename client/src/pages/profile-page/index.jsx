@@ -239,7 +239,7 @@ const ProfilePage = () => {
 
               </Box>
             </Box>
-            <CreateNewPaintingCard />
+            <CreateNewPaintingCard onSubmit={PaintingService.create} />
           </ProfileInfoAndCreateProductSection>
           <Box display="flex" flexDirection="column" gap={3} width="300px" my={5} alignSelf="center">
             <Button
