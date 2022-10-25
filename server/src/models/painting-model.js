@@ -29,12 +29,12 @@ const paintingSchema = Schema({
   categoryId: {
     type: Schema.Types.ObjectId,
     ref: 'Category',
-    required: true,
+    required: false,
   },
   sizeId: {
     type: Schema.Types.ObjectId,
     ref: 'Size',
-    required: true,
+    required: false,
   },
 }, {
   timestamps: true

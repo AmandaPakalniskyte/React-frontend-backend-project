@@ -75,6 +75,10 @@ const updateProfile = async (req, res) => {
     img: req.file?.filename,
     firstName: req.body.firstName,
     surname: req.body.surname,
+    street: req.body.street,
+    houseNumber: req.body.houseNumber,
+    apartmentNumber: req.body.apartmentNumber,
+    city: req.body.city,
     email: req.body.email,
   };
   try {
@@ -89,6 +93,10 @@ const updateProfile = async (req, res) => {
 
     if (requestData.firstName) req.authUser.firstName = requestData.firstName;
     if (requestData.surname) req.authUser.surname = requestData.surname;
+    if (requestData.street) req.authUser.street = requestData.street;
+    if (requestData.houseNumber) req.authUser.houseNumber = requestData.houseNumber;
+    if (requestData.apartmentNumber) req.authUser.apartmentNumber = requestData.apartmentNumber;
+    if (requestData.city) req.authUser.city = requestData.city;
     if (requestData.email) req.authUser.email = requestData.email;
 
     await req.authUser.save();

@@ -19,6 +19,22 @@ const userSchema = Schema({
     type: String,
     required: true,
   },
+  street: {
+    type: String,
+    required: false,
+  },
+  houseNumber: {
+    type: String,
+    required: false,
+  },
+  apartmentNumber: {
+    type: String,
+    required: false,
+  },
+  city: {
+    type: String,
+    required: false,
+  },
   role: {
     type: String,
     enum: ['USER', 'ADMIN'],
@@ -110,7 +126,16 @@ const userValidationSchema = yup.object({
 
   cartItems: yup.array(cartItemValidationSchema),
 
-  img: yup.string().typeError('User.img must be a string')
+  img: yup.string().typeError('User.img must be a string'),
+
+  street: yup.string().typeError('User.street must be a string'),
+
+  houseNumber: yup.string().typeError('User.houseNumber must be a string'),
+
+  apartmentNumber: yup.string().typeError('User.apartmentNumber must be a string'),
+
+  city: yup.string().typeError('User.city must be a string'),
+
 });
 
 const userUpdateValidationSchema = yup.object({
@@ -150,7 +175,15 @@ const userUpdateValidationSchema = yup.object({
 
   cartItems: yup.array(cartItemValidationSchema),
 
-  img: yup.string().typeError('User.img must be a string')
+  img: yup.string().typeError('User.img must be a string'),
+
+  street: yup.string().typeError('User.street must be a string'),
+
+  houseNumber: yup.string().typeError('User.houseNumber must be a string'),
+
+  apartmentNumber: yup.string().typeError('User.apartmentNumber must be a string'),
+
+  city: yup.string().typeError('User.city must be a string'),
 });
 
 userSchema.statics.validateData = (userData) => userValidationSchema.validate(userData);
