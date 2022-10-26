@@ -28,7 +28,6 @@ const BackgroundBox = ({ children }) => (
     position: 'relative',
     jutifyContent: 'center',
     display: 'flex',
-    // alignItems: 'center',
     flexDirection: 'column',
 
   })}
