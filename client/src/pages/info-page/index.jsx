@@ -1,28 +1,28 @@
 import * as React from 'react';
 import { Typography, Box } from '@mui/material';
 import { useParams } from 'react-router-dom';
-import { Slide } from 'react-slideshow-image';
+import AliceCarousel from 'react-alice-carousel';
 import { Image } from '../../components';
 import BackToGalleryButton from '../../components/back-to-galerry-button';
 import BackgroundBox from '../../components/background-box';
 import BackgroundContainer from '../../components/background-container';
 import 'react-slideshow-image/dist/styles.css';
+import 'react-alice-carousel/lib/alice-carousel.css';
 
 const domain = process.env.REACT_APP_SERVER_ADDRESS;
+
+const handleDragStart = (e) => e.preventDefault();
 
 const InfoPage = () => {
   const { id } = useParams();
   const [painting, setPainting] = React.useState(null);
-  const [loading, setLoading] = React.useState(false);
 
   const fetchPainting = React.useCallback(async () => {
-    setLoading(true);
     try {
       const resp = await fetch(`${domain}/api/paintings/${id}`);
       const answer = await resp.json();
       console.log(answer);
       setPainting(answer);
-      setLoading(false);
     } catch (error) { console.error(error); }
   }, [id]);
   React.useEffect(() => {
@@ -32,11 +32,17 @@ const InfoPage = () => {
   return (
     <BackgroundContainer>
       <BackgroundBox>
-        <Slide>
-          {loading ? 'loading' : painting && painting?.imgWall.map((img) => (
+        <AliceCarousel
+          mouseTracking
+          autoPlay="true"
+          infinite="true"
+          autoPlayInterval="3000"
+          items={painting?.imgWall.map((img) => (
             <Box key={img}>
               <Image
                 src={img}
+                onDragStart={handleDragStart}
+                role="presentation"
                 sx={{
                   position: 'relative',
                   top: 0,
@@ -47,7 +53,7 @@ const InfoPage = () => {
               />
             </Box>
           ))}
-        </Slide>
+        />
         <Typography variant="h6" component="div">
           Autorius:
           {' '}
