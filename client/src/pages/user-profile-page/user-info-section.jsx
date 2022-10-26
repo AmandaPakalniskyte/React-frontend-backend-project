@@ -2,43 +2,28 @@ import React from 'react';
 import { Box } from '@mui/material';
 
 const UserInfoSection = ({ children }) => (
-  <Box
-    height="100%"
-    width="100%"
-    display="flex"
-    sx={() => ({
-      flexDirection: {
-        xl: 'row',
-        lg: 'column',
-        md: 'column',
-        sm: 'column',
-        xs: 'column',
-      },
-      justifyContent: {
-        xl: 'space-around',
-        lg: 'center',
-        md: 'center',
-        sm: 'center',
-        xs: 'center',
-      },
-      alignItems: {
-        xl: 'stretch',
-        lg: 'center',
-        md: 'center',
-        sm: 'center',
-        xs: 'center',
-      },
-      gap: {
-        xl: 0,
-        lg: 5,
-        md: 5,
-        sm: 5,
-        xs: 5,
-      },
-    })}
-  >
-    {children}
+  <Box width="100%" display="flex" justifyContent="center">
+    <Box
+      display="flex"
+      flexDirection="column"
+      justifyContent="flex-start"
+      alignItems="center"
+      gap={5}
+      borderRadius={1}
+      p={5}
+      sx={(theme) => ({
+        backgroundColor: theme.palette.common.white,
+        width: {
+          lg: '500px',
+          md: '400px',
+          sm: '400px',
+          xs: '320px',
+        },
+      })}
+    >
+      {children}
 
+    </Box>
   </Box>
 );
 
