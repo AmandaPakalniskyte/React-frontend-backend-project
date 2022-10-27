@@ -3,7 +3,7 @@ import { Typography, Box } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import AliceCarousel from 'react-alice-carousel';
 import { Image } from '../../components';
-import BackToGalleryButton from '../../components/back-to-galerry-button';
+import BackToGalleryButtonDark from '../../components/back-to-galerry-button-dark';
 import BackgroundBox from '../../components/background-box';
 import BackgroundContainer from '../../components/background-container';
 import 'react-slideshow-image/dist/styles.css';
@@ -37,6 +37,7 @@ const InfoPage = () => {
           autoPlay="true"
           infinite="true"
           autoPlayInterval="3000"
+          disableDotsControls="true"
           items={painting?.imgWall.map((img) => (
             <Box key={img}>
               <Image
@@ -54,12 +55,12 @@ const InfoPage = () => {
             </Box>
           ))}
         />
-        <Typography variant="h6" component="div">
+        <Typography variant="h6" component="div" fontWeight={600}>
           Autorius:
           {' '}
           {painting?.author}
         </Typography>
-        <Typography variant="h6" component="div">
+        <Typography variant="h6" component="div" fontWeight={600}>
           Pavadinimas:
           {' '}
           {painting?.title}
@@ -85,7 +86,7 @@ const InfoPage = () => {
           {painting?.description}
         </Typography>
         <Box width="100%">
-          <BackToGalleryButton />
+          <BackToGalleryButtonDark />
         </Box>
 
       </BackgroundBox>

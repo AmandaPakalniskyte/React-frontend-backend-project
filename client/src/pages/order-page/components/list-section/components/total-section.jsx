@@ -6,7 +6,7 @@ import {
   styled,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import BackToGalleryButton from '../../../../../components/back-to-galerry-button';
+import BackToGalleryButtonLight from '../../../../../components/back-to-galerry-button-light';
 
 const StyledButton = styled(Button)(() => ({
 
@@ -53,7 +53,7 @@ const TotalSection = ({ total }) => {
         })}
         >
           {' '}
-          <BackToGalleryButton />
+          <BackToGalleryButtonLight />
 
         </Box>
 
@@ -97,7 +97,7 @@ const TotalSection = ({ total }) => {
             })}
             >
               {' '}
-              <BackToGalleryButton />
+              <BackToGalleryButtonLight />
 
             </Box>
           </Box>

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Box, Grid, Typography } from '@mui/material';
 import FavouritesContext from '../../contexts/favourites-context';
 import FavouriteCard from './favourite-card';
-import BackToGalleryButton from '../../components/back-to-galerry-button';
+import BackToGalleryButtonLight from '../../components/back-to-galerry-button-light';
 
 const domain = process.env.REACT_APP_SERVER_ADDRESS;
 
@@ -80,7 +80,7 @@ const FavouritesPage = () => {
 
         </Box>
       )}
-      <BackToGalleryButton />
+      <BackToGalleryButtonLight />
     </Box>
   );
 };
