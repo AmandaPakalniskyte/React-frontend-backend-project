@@ -11,7 +11,7 @@ const EditCard = ({
   onSubmit,
   initValues,
 }) => {
-  const [title, setTitle] = React.useState([]);
+  const [title, setTitle] = React.useState(initValues?.title ?? '');
   const [author, setAuthor] = React.useState(initValues?.author ?? '');
   const [price, setPrice] = React.useState(initValues?.price ?? '');
   const [img, setImg] = React.useState(initValues?.img ?? '');
