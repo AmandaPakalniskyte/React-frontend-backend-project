@@ -30,7 +30,7 @@ const IconSection = () => {
 
   return (
     <Box>
-      {!isAdmin && (
+      {(!isAdmin || !loggedIn) && (
         <>
           <IconButton
             size="large"
