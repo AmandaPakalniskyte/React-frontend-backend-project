@@ -2,6 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Typography, Button } from '@mui/material';
+// import PaintingService from '../../services/painting-service';
 
 const CreateNewPaintingCard = ({
   onSubmit,
@@ -11,6 +12,8 @@ const CreateNewPaintingCard = ({
   const [price, setPrice] = React.useState('');
   const [img, setImg] = React.useState('');
   const [description, setDescription] = React.useState('');
+  // const [categories, setCategories] = React.useState([]);
+  // const [category, setCategory] = React.useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -21,7 +24,7 @@ const CreateNewPaintingCard = ({
       price: Number(price),
       img,
       description,
-      sizeId: '6336dc406d9260f66411db59',
+      // categoryId: category,
       categoryId: '6336d629714b7d1d42c28a6e',
     });
   };
@@ -32,7 +35,15 @@ const CreateNewPaintingCard = ({
     setPrice('');
     setDescription('');
     setImg('');
+    // setCategory('');
   };
+
+  // React.useEffect(() => {
+  //   (async () => {
+  //     const fethedPaintings = await PaintingService.fetchCategories();
+  //     setCategories(fethedPaintings);
+  //   })();
+  // }, []);
 
   return (
     <Box
@@ -94,6 +105,17 @@ const CreateNewPaintingCard = ({
           value={description}
           onChange={(event) => setDescription(event.target.value)}
         />
+        {/* <TextField
+          variant="filled"
+          select
+          label="Kategorija"
+          value={category}
+          onChange={(event) => setCategory(event.target.value)}
+        >
+          {categories.map(({ id, label: categoryTitle }) => (
+            <MenuItem key={id} value={id}>{categoryTitle}</MenuItem>
+          ))}
+        </TextField> */}
       </Box>
       <Box my={3} width="100%" display="flex" justifyContent="space-between">
         <Button

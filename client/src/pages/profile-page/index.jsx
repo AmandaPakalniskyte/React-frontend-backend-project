@@ -67,6 +67,16 @@ const ProfilePage = () => {
     await handleFetchPaintings();
   };
 
+  // const fetchAllPaintings = async () => {
+  //   const fetchedPaintings = await PaintingService.fetchAll();
+  //   setPaintings(fetchedPaintings);
+  // };
+
+  // const createPainting = async (id) => {
+  //   await PaintingService.create(id);
+  //   fetchAllPaintings();
+  // };
+
   const { user, dispatch } = useAuth();
   const [imgString, setImgString] = React.useState(null);
   const [imgFile, setImgFile] = React.useState(null);
@@ -108,6 +118,10 @@ const ProfilePage = () => {
     validationSchema,
     enableReinitialize: true,
   });
+
+  // React.useEffect(() => {
+  //   fetchAllPaintings();
+  // }, []);
 
   React.useEffect(() => {
     cancelImgUpload();
