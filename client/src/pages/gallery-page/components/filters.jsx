@@ -3,9 +3,9 @@ import {
   Box,
   Typography,
   Drawer,
-  Divider,
   useMediaQuery,
   Button,
+  Divider,
 } from '@mui/material';
 import TuneIcon from '@mui/icons-material/Tune';
 import { useSearchParams } from 'react-router-dom';
@@ -103,7 +103,6 @@ const Filters = ({ drawerWidth }) => {
       >
         <TuneIcon sx={{ color: 'common.white', fontSize: '2rem' }} />
       </Button>
-
       <Drawer
         anchor="left"
         variant={isExtraLarge ? 'persistent' : 'temporary'}
@@ -123,13 +122,12 @@ const Filters = ({ drawerWidth }) => {
             min={priceLowerBound}
             max={priceHigherBound}
           />
-          <Divider sx={{ my: 2 }} />
+          <Divider sx={{ my: 4 }} />
           <SelectField
             options={categories}
             value={category}
             onChange={handleCategoryChange}
           />
-          <Divider sx={{ my: 2 }} />
           {/* <CheckboxField
             label="Dydžiai"
             options={sizes}
@@ -137,7 +135,7 @@ const Filters = ({ drawerWidth }) => {
             onChange={handleSizeChange}
           /> */}
         </Box>
-        <Box width="100%" textAlign="center">
+        <Box width="100%" textAlign="center" mt={3}>
           <Button variant="contained" onClick={deleteFilters}>
             PAŠALINTI FILTRUS
           </Button>
