@@ -11,9 +11,8 @@ import TuneIcon from '@mui/icons-material/Tune';
 import { useSearchParams } from 'react-router-dom';
 import RangeField from '../../../components/range-field';
 import SelectField from '../../../components/select-field';
-import CheckboxField from '../../../components/checkbox-field';
+// import CheckboxField from '../../../components/checkbox-field';
 import PaintingService from '../../../services/painting-service';
-import SizeService from '../../../services/size-service';
 import CategoryService from '../../../services/category-service';
 
 const Filters = ({ drawerWidth }) => {
@@ -22,12 +21,10 @@ const Filters = ({ drawerWidth }) => {
   const isExtraLarge = useMediaQuery((theme) => theme.breakpoints.up('xl'));
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [categories, setCategories] = React.useState([]);
-  const [sizes, setSizes] = React.useState([]);
 
   const [priceBounds, setPriceBounds] = React.useState([0, 0]);
   const [priceRange, setPriceRange] = React.useState([0, 0]);
   const [category, setCategory] = React.useState(null);
-  const [selectedSizes, setSelectedSizes] = React.useState([]);
   const [priceLowerBound, priceHigherBound] = priceBounds;
 
   const handlePriceRangeChange = (_, [min, max]) => {
@@ -56,29 +53,18 @@ const Filters = ({ drawerWidth }) => {
     setCategory(newCategory);
   };
 
-  const handleSizeChange = (_, newSizes) => {
-    const ids = newSizes.map((size) => size.id);
-    searchParams.delete('sizeId');
-    ids.forEach((id) => searchParams.append('sizeId', id));
-
-    setSearchParams(searchParams);
-    setSelectedSizes(newSizes);
-  };
-
   const deleteFilters = () => {
     searchParams.delete('price_gte');
     searchParams.delete('price_lte');
     searchParams.delete('categoryId');
-    searchParams.delete('sizeId');
 
     setSearchParams(searchParams);
   };
 
   React.useEffect(() => {
     (async () => {
-      const [fetchedCategories, fetchedSizes, fetchedPriceRange] = await Promise.all([
+      const [fetchedCategories, fetchedPriceRange] = await Promise.all([
         CategoryService.fetchAll(),
-        SizeService.fetchAll(),
         PaintingService.getPriceRange(),
       ]);
       const priceMinInit = searchParams.get('price_gte') ?? fetchedPriceRange[0];
@@ -91,14 +77,7 @@ const Filters = ({ drawerWidth }) => {
         setCategory(categoryInit);
       }
 
-      const selectedSizesInit = searchParams
-        .getAll('sizeId')
-        .map((id) => fetchedSizes.find((size) => size.id === id))
-        .filter((size) => size !== undefined);
-      setSelectedSizes(selectedSizesInit);
-
       setCategories(fetchedCategories);
-      setSizes(fetchedSizes);
       setPriceBounds(fetchedPriceRange);
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -151,12 +130,12 @@ const Filters = ({ drawerWidth }) => {
             onChange={handleCategoryChange}
           />
           <Divider sx={{ my: 2 }} />
-          <CheckboxField
+          {/* <CheckboxField
             label="Dydžiai"
             options={sizes}
             value={selectedSizes}
             onChange={handleSizeChange}
-          />
+          /> */}
         </Box>
         <Box width="100%" textAlign="center">
           <Button variant="contained" onClick={deleteFilters}>
