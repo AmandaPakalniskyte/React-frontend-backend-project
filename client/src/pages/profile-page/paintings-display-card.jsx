@@ -4,8 +4,10 @@ import {
   Box,
   Card,
   CardContent,
-  CardActions,
+  CardActions, IconButton,
 } from '@mui/material';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Image, TypographyLimited } from '../../components';
 
 const PaintingsDisplayCard = ({
@@ -14,8 +16,9 @@ const PaintingsDisplayCard = ({
   img,
   description,
   price,
-  size,
   category,
+  onEdit,
+  onDelete,
 }) => (
   <Card sx={{
     display: 'flex', flexDirection: 'column', height: '100%', p: 1,
@@ -42,10 +45,6 @@ const PaintingsDisplayCard = ({
           {author}
         </Typography>
         <Typography>
-          Dydis:
-          {size}
-        </Typography>
-        <Typography>
           Kategorija:
           {' '}
           {category}
@@ -57,16 +56,33 @@ const PaintingsDisplayCard = ({
           {' '}
           EUR
         </Typography>
-
       </Box>
       <TypographyLimited variant="body2" color="text.secondary">
         {description}
       </TypographyLimited>
+      <Box display="flex" justifyContent="center">
+        <Box display="flex" justifyContent="center" mt={2}>
+          <IconButton
+            sx={(theme) => ({ color: theme.palette.common.black })}
+            size="large"
+            onClick={onEdit}
+          >
+            <ModeEditIcon />
+          </IconButton>
+        </Box>
+        <Box display="flex" justifyContent="center" mt={2}>
+          <IconButton
+            sx={(theme) => ({ color: theme.palette.common.black })}
+            size="large"
+            onClick={onDelete}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </Box>
+      </Box>
     </CardContent>
     <CardActions sx={{ pb: 2, alignSelf: 'center' }}>
-
       <Box sx={{ display: 'flex', ml: 1 }} />
-
     </CardActions>
   </Card>
 );

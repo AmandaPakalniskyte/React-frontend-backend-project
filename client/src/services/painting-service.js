@@ -50,8 +50,17 @@ const update = async ({ id, ...updateProps }) => {
     body: JSON.stringify(updateProps),
   });
   const responseData = await response.json();
+  console.log(responseData);
 
   return responseData;
+};
+
+const remove = async (id) => {
+  await fetch(`${domain}/${collectionName}/${id}`, {
+    method: 'DELETE',
+  });
+
+  return true;
 };
 
 const getPriceRange = async () => {
@@ -61,13 +70,22 @@ const getPriceRange = async () => {
   return priceRange;
 };
 
+// const fetchCategories = async () => {
+//   const response = await fetch(`${domain}/${collectionName}/categories`);
+//   const categories = await response.json();
+
+//   return categories;
+// };
+
 const PaintingService = {
   fetchAll,
   create,
   update,
+  remove,
   fetchById,
   fetchByIdArr,
   getPriceRange,
+  // fetchCategories,
 };
 
 export default PaintingService;
