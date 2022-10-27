@@ -73,8 +73,8 @@ const create = async (req, res) => {
 
 const replace = async (req, res) => {
   const paintingId = req.params.id;
-  const { title, author, description, categoryId, sizeId, img, imgWall, price } = req.body;
-  const newPaintingData = { title, author, description, categoryId, sizeId, img, imgWall, price };
+  const { title, author, description, categoryId, img, imgWall, price } = req.body;
+  const newPaintingData = { title, author, description, categoryId, img, imgWall, price };
 
   try {
     await PaintingModel.validateData(newPaintingData);
@@ -94,8 +94,8 @@ const replace = async (req, res) => {
 
 const update = async (req, res) => {
   const paintingId = req.params.id;
-  const { title, author, description, categoryId, sizeId, img, imgWall, price } = req.body;
-  const newPaintingData = removeEmptyProps({ title, author, description, categoryId, sizeId, img, imgWall, price });
+  const { title, author, description, categoryId, img, imgWall, price } = req.body;
+  const newPaintingData = removeEmptyProps({ title, author, description, categoryId, img, imgWall, price });
 
   try {
     await PaintingModel.validateUpdateData(newPaintingData);

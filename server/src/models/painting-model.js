@@ -31,11 +31,6 @@ const paintingSchema = Schema({
     ref: 'Category',
     required: false,
   },
-  sizeId: {
-    type: Schema.Types.ObjectId,
-    ref: 'Size',
-    required: false,
-  },
 }, {
   timestamps: true
 });
@@ -65,14 +60,6 @@ const paintingValidationSchema = yup.object().shape({
       Types.ObjectId.isValid
     )
     .required('Painting.categoryId is required'),
-  sizeId: yup
-    .string().typeError('Painting.sizeId must be a string')
-    .test(
-      'is-mongo-object-id',
-      'Painting.sizeId must be valid MongoDB object Id',
-      Types.ObjectId.isValid
-    )
-    .required('Painting.sizeId is required'),
 });
 
 const paintingUpdateValidationSchema = yup.object().shape({
@@ -88,12 +75,6 @@ const paintingUpdateValidationSchema = yup.object().shape({
     .test(
       'is-mongo-object-id',
       'Painting.categoryId must be valid MongoDB object Id',
-      Types.ObjectId.isValid
-    ),
-  sizeId: yup.string().typeError('Painting.sizeId must be a string')
-    .test(
-      'is-mongo-object-id',
-      'Painting.sizeId must be valid MongoDB object Id',
       Types.ObjectId.isValid
     ),
 });
